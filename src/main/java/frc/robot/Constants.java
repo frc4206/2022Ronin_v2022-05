@@ -122,16 +122,33 @@ public final class Constants {
 
     }
 
-    public final class Motors {
-        public static final int falconMotorR = 25;
-        public static final int falconMotorL = 24;
+    public final class MotorsIDs {
+        //kellie
+        public static final int climberfalconMotorR = 25;
+        public static final int climberfalconMotorL = 24;
+
+        //reggie
+        public static final int groundmotor = 27; 
     }
 
     public final class Pneumatics{
+        //kellie and Mr Blair
         public static final int dblSolenoidfwd = 3;
         public static final int dblSolenoidrev = 2;
         public static final int Solenoid = 1;
         public static final int pneumaticPressureSensor = 0;
+
+        //reggie
+        public static final int SolenoidForward = 0;
+        public static final int SolenoidReverse = 1; 
+    }
+
+    public final class motorPnuematicsValues{
+        //reggie
+    public static final double FeederIn = -1;
+    public static final double FeederOut = 1;
+    public static final double  FeederStop = -0.2;
+
     }
 
     public static final class AutoConstants {

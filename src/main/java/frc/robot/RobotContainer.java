@@ -48,6 +48,7 @@ public class RobotContainer {
   private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
   private final ClimberSubsystem motors = new ClimberSubsystem();
   private final PneumaticsSubsystem pneumatics = new PneumaticsSubsystem();
+  private final HarvestorSubsystem harvestor = new HarvestorSubsystem();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
