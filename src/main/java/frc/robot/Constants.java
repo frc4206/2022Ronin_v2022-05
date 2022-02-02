@@ -122,6 +122,18 @@ public final class Constants {
 
     }
 
+    public final class Motors {
+        public static final int falconMotorR = 25;
+        public static final int falconMotorL = 24;
+    }
+
+    public final class Pneumatics{
+        public static final int dblSolenoidfwd = 3;
+        public static final int dblSolenoidrev = 2;
+        public static final int Solenoid = 1;
+        public static final int pneumaticPressureSensor = 0;
+    }
+
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;

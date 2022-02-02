@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,6 +15,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.climber.AutoClimbCommand;
+import frc.robot.commands.climber.ClimberMotorStopCommand;
+import frc.robot.commands.climber.ClimberMotorUpCommand;
+import frc.robot.commands.climber.ClimberMotorDownCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -25,6 +30,8 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   /* Controllers */
   private final Joystick driver = new Joystick(0);
+  private final Joystick operator = new Joystick(1);
+
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -39,6 +46,8 @@ public class RobotContainer {
 
   /* Subsystems */
   private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+  private final ClimberSubsystem motors = new ClimberSubsystem();
+  private final PneumaticsSubsystem pneumatics = new PneumaticsSubsystem();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -68,6 +77,11 @@ public class RobotContainer {
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
     new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
 
+    //-----------------------Climbing Buttons----------------------------------------------/
+    new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
+    new JoystickButton(operator, Button.kB.value).whenPressed(new ClimberMotorUpCommand(motors));
+    new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
+    new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
   }
 
   /**
