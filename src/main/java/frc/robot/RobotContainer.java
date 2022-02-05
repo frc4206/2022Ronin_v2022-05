@@ -16,8 +16,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.commands.climber.AutoClimbCommand;
+import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberMotorStopCommand;
 import frc.robot.commands.climber.ClimberMotorUpCommand;
+import frc.robot.commands.climber.ClimberUpManualCommand;
 import frc.robot.commands.climber.ClimberMotorDownCommand;
 import frc.robot.subsystems.*;
 
@@ -57,7 +59,7 @@ public class RobotContainer {
     boolean openLoop = true;
     s_Swerve.setDefaultCommand(new TeleopSwerve(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
 
-
+    //makes the smartdashboard f0r auto commands
     autoChooser.addOption("S Then Backwards", new exampleAuto(s_Swerve));
     autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(s_Swerve));
     autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(s_Swerve));
@@ -83,6 +85,9 @@ public class RobotContainer {
     new JoystickButton(operator, Button.kB.value).whenPressed(new ClimberMotorUpCommand(motors));
     new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
     new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
+    new JoystickButton(operator, Button.kLeftBumper.value).whileHeld(new ClimberDownManualCommand(motors));
+    new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new ClimberUpManualCommand(motors));
+
   }
 
   /**
