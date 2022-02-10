@@ -28,7 +28,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
   }
 
   public void dblSolenoid(DoubleSolenoid.Value direction) {
-    //dblSolenoid.set(direction);
+    dblSolenoid.set(direction);
   }
 
   public void solenoid_on(){
