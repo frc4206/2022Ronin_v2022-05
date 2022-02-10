@@ -10,7 +10,6 @@ import frc.robot.subsystems.HarvestorSubsystem;
 
 public class HarvestorOutCommand extends CommandBase {
   HarvestorSubsystem m_harvestor;
-  private double StartInitialize;
   public HarvestorOutCommand(HarvestorSubsystem harvestor) {
      m_harvestor = harvestor ;
     addRequirements(harvestor);
@@ -18,9 +17,7 @@ public class HarvestorOutCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    StartInitialize = Timer.getFPGATimestamp() + 0.2;
-    
+  public void initialize() {   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +29,9 @@ public class HarvestorOutCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+  }
 
   // Returns true when the command should end.
   @Override

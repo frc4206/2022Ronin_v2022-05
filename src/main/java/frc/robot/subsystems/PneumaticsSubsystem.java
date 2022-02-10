@@ -19,16 +19,16 @@ public class PneumaticsSubsystem extends SubsystemBase {
   /** Creates a new Subsys_Pneumatics. */
 
   private DoubleSolenoid dblSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.dblSolenoidfwd, Constants.Pneumatics.dblSolenoidrev);
-  private Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.Solenoid);
+  //private Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.Solenoid);
   private AnalogInput pneumaticPressureSensor = new AnalogInput(Constants.Pneumatics.pneumaticPressureSensor);
   //private Compressor compressor = new Compressor(null);
   
   public PneumaticsSubsystem() {
-  //  compressor.enableDigital();
+    //compressor.enableDigital();
   }
 
   public void dblSolenoid(DoubleSolenoid.Value direction) {
-    dblSolenoid.set(direction);
+    //dblSolenoid.set(direction);
   }
 
   public void solenoid_on(){
@@ -38,10 +38,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
   public void solenoid_off(){
     solenoid.set(false);
   }
+  
 
   public String dblSolenoid_status(){
     return dblSolenoid.get().toString();
-  }
+  }*/
 
   @Override
   public void periodic() {

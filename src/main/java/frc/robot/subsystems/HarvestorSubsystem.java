@@ -14,7 +14,7 @@ public class HarvestorSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public HarvestorSubsystem() {}
   TalonFX IntakeMotor = new TalonFX(Constants.MotorsIDs.groundmotor);
-  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.SolenoidForward, Constants.Pneumatics.SolenoidReverse);
+  //DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.SolenoidForward, Constants.Pneumatics.SolenoidReverse);
 
   public void feederIn(){
     IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.motorPnuematicsValues.FeederIn);
@@ -27,7 +27,7 @@ public class HarvestorSubsystem extends SubsystemBase {
   }
   
   
-  public void GroundFeederShifter(){
+  public void GroundFeederShifter(){/*
     switch (solenoid.get()){
       case kOff:
         solenoid.set(DoubleSolenoid.Value.kForward);
@@ -39,7 +39,7 @@ public class HarvestorSubsystem extends SubsystemBase {
         solenoid.set(DoubleSolenoid.Value.kForward);
         break;
     }
-
+*/
   }
 
 

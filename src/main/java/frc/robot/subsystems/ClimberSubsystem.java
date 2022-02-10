@@ -29,7 +29,7 @@ public class ClimberSubsystem extends SubsystemBase {
     falconMotorL.configFactoryDefault();
     falconMotorR.set(0.0);
     falconMotorL.set(0.0);
-    falconMotorR.setInverted(false);
+    falconMotorR.setInverted(true);
     falconMotorL.setInverted(false);
     falconMotorR.setNeutralMode(NeutralMode.Brake);
     falconMotorL.setNeutralMode(NeutralMode.Brake);
@@ -80,7 +80,7 @@ falconMotorL.configFactoryDefault();
 falconMotorR.setNeutralMode(NeutralMode.Brake);
 falconMotorL.setNeutralMode(NeutralMode.Brake);
 falconMotorR.follow(falconMotorL);
-  }
+}
 
   public void climber_up() {
     falconMotorL.set(0.2);

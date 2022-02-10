@@ -10,6 +10,35 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+    
+    public final class MotorsIDs {
+        //kellie
+        public static final int climberfalconMotorR = 25;
+        public static final int climberfalconMotorL = 24;
+
+        //reggie
+        public static final int groundmotor = 27; 
+    }
+
+    public final class Pneumatics{
+        //kellie and Mr Blair
+        public static final int dblSolenoidfwd = 3;
+        public static final int dblSolenoidrev = 2;
+        public static final int Solenoid = 1;
+        public static final int pneumaticPressureSensor = 0;
+
+        //reggie
+        public static final int SolenoidForward = 4;
+        public static final int SolenoidReverse = 5; 
+    }
+
+    public final class motorPnuematicsValues{
+        //reggie
+    public static final double FeederIn = -1;
+    public static final double FeederOut = 1;
+    public static final double  FeederStop = -0.2;
+
+    }
 
     public static final class Swerve {
         public static final int pigeonID = 20;
@@ -122,34 +151,6 @@ public final class Constants {
 
     }
 
-    public final class MotorsIDs {
-        //kellie
-        public static final int climberfalconMotorR = 25;
-        public static final int climberfalconMotorL = 24;
-
-        //reggie
-        public static final int groundmotor = 27; 
-    }
-
-    public final class Pneumatics{
-        //kellie and Mr Blair
-        public static final int dblSolenoidfwd = 3;
-        public static final int dblSolenoidrev = 2;
-        public static final int Solenoid = 1;
-        public static final int pneumaticPressureSensor = 0;
-
-        //reggie
-        public static final int SolenoidForward = 0;
-        public static final int SolenoidReverse = 1; 
-    }
-
-    public final class motorPnuematicsValues{
-        //reggie
-    public static final double FeederIn = -1;
-    public static final double FeederOut = 1;
-    public static final double  FeederStop = -0.2;
-
-    }
 
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 3;
