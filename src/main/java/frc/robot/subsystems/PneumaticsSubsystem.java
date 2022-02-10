@@ -32,17 +32,17 @@ public class PneumaticsSubsystem extends SubsystemBase {
   }
 
   public void solenoid_on(){
-    solenoid.set(true);
+    //solenoid.set(true);
   }
 
   public void solenoid_off(){
-    solenoid.set(false);
+    //solenoid.set(false);
   }
   
 
   public String dblSolenoid_status(){
     return dblSolenoid.get().toString();
-  }*/
+  }
 
   @Override
   public void periodic() {

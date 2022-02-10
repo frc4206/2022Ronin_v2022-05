@@ -12,7 +12,7 @@ public class HarvestorOutCommand extends CommandBase {
   HarvestorSubsystem m_harvestor;
   public HarvestorOutCommand(HarvestorSubsystem harvestor) {
      m_harvestor = harvestor ;
-    addRequirements(harvestor);
+    addRequirements(m_harvestor);
   }
 
   // Called when the command is initially scheduled.
@@ -23,6 +23,7 @@ public class HarvestorOutCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_harvestor.GroundFeederShifter();
     m_harvestor.feederOut();
   }
     
@@ -30,6 +31,7 @@ public class HarvestorOutCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_harvestor.feederStop();
 
   }
 
