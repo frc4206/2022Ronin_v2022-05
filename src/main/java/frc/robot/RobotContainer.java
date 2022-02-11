@@ -51,6 +51,7 @@ public class RobotContainer {
   private final ClimberSubsystem motors = new ClimberSubsystem();
   private final PneumaticsSubsystem pneumatics = new PneumaticsSubsystem();
   private final HarvestorSubsystem harvestor = new HarvestorSubsystem();
+  private final ShooterSubsystem shooter = new ShooterSubsystem();
 
   private final ConveyorSubsystem conveyor = new ConveyorSubsystem();
 

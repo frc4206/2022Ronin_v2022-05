@@ -29,5 +29,9 @@ public class PowerHubSubsystem extends SubsystemBase {
     SmartDashboard.putString("Climber Right Encoder", GlobalVariables.climberRightEncoder+"");
     SmartDashboard.putString("Climb Task", GlobalVariables.climbtasknumber+"");
     SmartDashboard.putString("Limitswitch", GlobalVariables.Limitswitch+"");
+    SmartDashboard.putString("Upper Velocity", GlobalVariables.UpperShooterVelocity+"");
+    SmartDashboard.putString("Lower Velocity", GlobalVariables.LowerShooterVelocity+"");
+    SmartDashboard.putString("Upper Velocity Set", GlobalVariables.UpperVelocitySet+"");
+    SmartDashboard.putString("Lower Velocity Set", GlobalVariables.LowerVelocitySet+"");
   }
 }

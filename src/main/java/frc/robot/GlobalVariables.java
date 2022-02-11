@@ -9,4 +9,9 @@ public class GlobalVariables {
   public static double climberRightEncoder;
   public static String climbtasknumber;
   public static boolean Limitswitch;
+
+  public static double UpperVelocitySet = 16000.0;
+  public static double LowerVelocitySet = 14000.0;
+  public static double UpperShooterVelocity;
+  public static double LowerShooterVelocity;
 }
