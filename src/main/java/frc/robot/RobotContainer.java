@@ -95,9 +95,8 @@ public class RobotContainer {
     new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
 
     //-----------------------Shooter Buttons----------------------------------------------/
-
-    new JoystickButton(driver, XboxController.Button.kX.value).whenPressed(new ShooterGoCommand(shooter));
-    new JoystickButton(driver, XboxController.Button.kX.value).whenReleased(new ShooterStopCommand(shooter));
+    new AxisTrigger(driver, 2).whenPressed(new ShooterGoCommand(shooter));
+    new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
 
     //-----------------------Climbing Buttons----------------------------------------------/
     //new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
@@ -116,6 +115,10 @@ public class RobotContainer {
     //-----------------------Conveyor Buttons----------------------------------------------/
     new JoystickButton(operator, Button.kA.value).whileHeld(new ConveyorForwardCommand(conveyor));
     new JoystickButton(operator, Button.kB.value).whileHeld(new ConveyorBackwardCommand(conveyor));
+
+    //in case or driver wanting to shoot
+    new JoystickButton(driver, Button.kY.value).whileHeld(new ConveyorForwardCommand(conveyor));
+
 
 
   
