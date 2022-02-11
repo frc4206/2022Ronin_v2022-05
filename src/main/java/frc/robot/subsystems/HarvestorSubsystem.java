@@ -17,13 +17,13 @@ public class HarvestorSubsystem extends SubsystemBase {
   //DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.SolenoidForward, Constants.Pneumatics.SolenoidReverse);
 
   public void feederIn(){
-    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.motorPnuematicsValues.FeederIn);
+    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.MotorValues.FeederIn);
   }
   public void feederOut(){
-    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.motorPnuematicsValues.FeederOut);
+    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.MotorValues.FeederOut);
   }
   public void feederStop(){
-    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.motorPnuematicsValues.FeederStop);
+    IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.MotorValues.FeederStop);
   }
   
   

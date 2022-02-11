@@ -18,6 +18,10 @@ public final class Constants {
 
         //reggie
         public static final int groundmotor = 27; 
+
+        //andrew 
+        public static final int conveyormotor = 29; 
+
     }
 
     public final class Pneumatics{
@@ -32,11 +36,16 @@ public final class Constants {
         public static final int SolenoidReverse = 5; 
     }
 
-    public final class motorPnuematicsValues{
+    public final class MotorValues{
         //reggie
-    public static final double FeederIn = -1;
-    public static final double FeederOut = 1;
-    public static final double  FeederStop = -0.2;
+        public static final double FeederIn = -1;
+        public static final double FeederOut = 1;
+        public static final double  FeederStop = -0.2;
+
+        //andrew
+        public static final double conveyorForward = -1;
+        public static final double conveyorBackward = 1;
+        public static final double  conveyorStop = -0.2;
 
     }
 

@@ -52,6 +52,9 @@ public class RobotContainer {
   private final PneumaticsSubsystem pneumatics = new PneumaticsSubsystem();
   private final HarvestorSubsystem harvestor = new HarvestorSubsystem();
 
+  private final ConveyorSubsystem conveyor = new ConveyorSubsystem();
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
