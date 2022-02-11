@@ -7,10 +7,10 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class MotorStopCommand extends CommandBase {
+public class ShooterStopCommand extends CommandBase {
   private final ShooterSubsystem motors;
   /** Creates a new Com_Motors_Stop. */
-  public MotorStopCommand(ShooterSubsystem subsystem) {
+  public ShooterStopCommand(ShooterSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     motors = subsystem;
     addRequirements(motors);

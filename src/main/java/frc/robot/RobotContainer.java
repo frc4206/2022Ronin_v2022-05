@@ -20,6 +20,8 @@ import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberMotorStopCommand;
 import frc.robot.commands.climber.ClimberMotorUpCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
+import frc.robot.commands.shooter.ShooterGoCommand;
+import frc.robot.commands.shooter.ShooterStopCommand;
 import frc.robot.commands.climber.ClimberMotorDownCommand;
 import frc.robot.subsystems.*;
 
@@ -82,6 +84,8 @@ public class RobotContainer {
     zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
     new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
+    new JoystickButton(driver, XboxController.Button.kX.value).whenPressed(new ShooterGoCommand(shooter));
+    new JoystickButton(driver, XboxController.Button.kX.value).whenReleased(new ShooterStopCommand(shooter));
 
     //-----------------------Climbing Buttons----------------------------------------------/
     new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
@@ -91,6 +95,7 @@ public class RobotContainer {
     new JoystickButton(operator, Button.kLeftBumper.value).whileHeld(new ClimberDownManualCommand(motors));
     new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new ClimberUpManualCommand(motors));
 
+  
   }
 
   /**
