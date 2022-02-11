@@ -7,19 +7,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalVariables;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PneumaticsSubsystem extends SubsystemBase {
 
-  /** Creates a new Subsys_Pneumatics. */
 
-  private DoubleSolenoid dblSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.dblSolenoidfwd, Constants.Pneumatics.dblSolenoidrev);
-  //private Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.Solenoid);
+  //needs the pistons for the harvestor and climber
+  private DoubleSolenoid climberDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.climberSolenoidFWD, Constants.Pneumatics.climberSolenoidBKWD);
+  private DoubleSolenoid harvestorDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.harvestorSolenoidFWD, Constants.Pneumatics.harvestorSolenoidBKWD);
+
+  //adds the sensors that we may use
   private AnalogInput pneumaticPressureSensor = new AnalogInput(Constants.Pneumatics.pneumaticPressureSensor);
   //private Compressor compressor = new Compressor(null);
   
@@ -28,20 +27,28 @@ public class PneumaticsSubsystem extends SubsystemBase {
   }
 
   public void dblSolenoid(DoubleSolenoid.Value direction) {
-    dblSolenoid.set(direction);
-  }
-
-  public void solenoid_on(){
-    //solenoid.set(true);
-  }
-
-  public void solenoid_off(){
-    //solenoid.set(false);
+    climberDSolenoid.set(direction);
   }
   
 
   public String dblSolenoid_status(){
-    return dblSolenoid.get().toString();
+    return climberDSolenoid.get().toString();
+  }
+
+
+  public void GroundFeederShifter(){
+    switch (harvestorDSolenoid.get()){
+      case kOff:
+        harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
+       break;
+      case kForward:
+        harvestorDSolenoid.set(DoubleSolenoid.Value.kReverse);
+       break;
+      case kReverse:
+        harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
+        break;
+    }
+
   }
 
   @Override

@@ -8,19 +8,22 @@ package frc.robot.commands.harvestor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HarvestorSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class HarvestorInCommand extends CommandBase {
- private final HarvestorSubsystem m_harvestor;
-  public HarvestorInCommand(HarvestorSubsystem harvestor) {
-    m_harvestor = harvestor;
-    addRequirements(harvestor);
+  HarvestorSubsystem m_harvestor;
+  PneumaticsSubsystem m_pneumatics;
+  public HarvestorInCommand(HarvestorSubsystem harvestor, PneumaticsSubsystem pneumatics) {
+     m_harvestor = harvestor ;
+     m_pneumatics = pneumatics;
+    addRequirements(m_harvestor, m_pneumatics);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_harvestor.GroundFeederShifter();
-
+  public void initialize() {  
+    m_pneumatics.GroundFeederShifter();
+ 
   }
 
   // Called every time the scheduler runs while the command is scheduled.

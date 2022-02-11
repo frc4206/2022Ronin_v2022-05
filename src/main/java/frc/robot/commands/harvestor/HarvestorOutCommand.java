@@ -4,21 +4,23 @@
 
 package frc.robot.commands.harvestor;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HarvestorSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class HarvestorOutCommand extends CommandBase {
   HarvestorSubsystem m_harvestor;
-  public HarvestorOutCommand(HarvestorSubsystem harvestor) {
+  PneumaticsSubsystem m_pneumatics;
+  public HarvestorOutCommand(HarvestorSubsystem harvestor, PneumaticsSubsystem pneumatics) {
      m_harvestor = harvestor ;
-    addRequirements(m_harvestor);
+     m_pneumatics = pneumatics;
+    addRequirements(m_harvestor, m_pneumatics);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {  
-    m_harvestor.GroundFeederShifter();
+    m_pneumatics.GroundFeederShifter();
  
   }
 

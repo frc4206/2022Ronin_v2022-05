@@ -30,30 +30,30 @@ public final class Constants {
 
     public final class Pneumatics{
         //kellie and Mr Blair
-        public static final int dblSolenoidfwd = 3;
-        public static final int dblSolenoidrev = 2;
-        public static final int Solenoid = 1;
+        public static final int climberSolenoidFWD = 0;
+        public static final int climberSolenoidBKWD = 1;
         public static final int pneumaticPressureSensor = 0;
 
         //reggie
-        public static final int SolenoidForward = 4;
-        public static final int SolenoidReverse = 5; 
+        public static final int harvestorSolenoidFWD = 2;
+        public static final int harvestorSolenoidBKWD = 3; 
     }
 
     public final class MotorValues{
         //reggie
-        public static final double FeederIn = -1;
-        public static final double FeederOut = 1;
-        public static final double  FeederStop = -0.2;
+        public static final double FeederIn = -0.5;
+        public static final double FeederOut = 0.5;
+        public static final double  FeederStop = 0;
 
         //andrew
-        public static final double conveyorForward = -1;
-        public static final double conveyorBackward = 1;
-        public static final double  conveyorStop = -0.2;
+        public static final double conveyorForward = -0.5;
+        public static final double conveyorBackward = 0.5;
+        public static final double  conveyorStop = 0;
 
     }
 
     public static final class Swerve {
+        //this is all mainly andrew so just ask and ill explain
         public static final int pigeonID = 20;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
@@ -66,8 +66,8 @@ public final class Constants {
         public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
-        public static final double driveGearRatio = (6.75 / 1.0); //6.86:1
-        public static final double angleGearRatio = (12.8 / 1.0); //12.8:1
+        public static final double driveGearRatio = (6.75 / 1.0);
+        public static final double angleGearRatio = (12.8 / 1.0); 
 
         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
                 new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
@@ -75,6 +75,7 @@ public final class Constants {
                 new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
                 new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
 
+                
         /* Swerve Current Limiting */
         public static final int angleContinuousCurrentLimit = 25;
         public static final int anglePeakCurrentLimit = 40;

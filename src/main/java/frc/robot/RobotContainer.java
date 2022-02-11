@@ -12,26 +12,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.commands.climber.AngleClimbCommand;
-import frc.robot.commands.climber.AutoClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
-import frc.robot.commands.climber.ClimberMotorStopCommand;
-import frc.robot.commands.climber.ClimberMotorUpCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
-<<<<<<< Updated upstream
 import frc.robot.commands.shooter.ShooterGoCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
-=======
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.harvestor.HarvestorReverseCommand;
->>>>>>> Stashed changes
-import frc.robot.commands.climber.ClimberMotorDownCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -89,48 +81,51 @@ public class RobotContainer {
 
 
   private void configureButtonBindings() {
-    /* Driver Buttons */
+    //-----------------------Driver Buttons----------------------------------------------/
     zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
     new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
+
+
 
     //-----------------------Shooter Buttons----------------------------------------------/
     new AxisTrigger(driver, 2).whenPressed(new ShooterGoCommand(shooter));
     new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
 
+
+
     //-----------------------Climbing Buttons----------------------------------------------/
+    //more specific button combinations for complex programs
     //new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
     //new JoystickButton(operator, Button.kB.value).whenPressed(new ClimberMotorUpCommand(motors));
     //new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
     //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
+
+    //basic up and down movement that is manual buttons
     new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
     new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
     new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
 
+
+
     //-----------------------Harvestor Buttons----------------------------------------------/
-    new AxisTrigger(operator, 2).whenPressed(new HarvestorOutCommand(harvestor));
-    new AxisTrigger(operator, 3).whenPressed(new HarvestorInCommand(harvestor));
+    new AxisTrigger(operator, 2).whenPressed(new HarvestorOutCommand(harvestor, pneumatics));
+    new AxisTrigger(operator, 3).whenPressed(new HarvestorInCommand(harvestor, pneumatics));
     new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new HarvestorReverseCommand(harvestor));
     
+
+
     //-----------------------Conveyor Buttons----------------------------------------------/
     new JoystickButton(operator, Button.kA.value).whileHeld(new ConveyorForwardCommand(conveyor));
     new JoystickButton(operator, Button.kB.value).whileHeld(new ConveyorBackwardCommand(conveyor));
 
     //in case or driver wanting to shoot
-    new JoystickButton(driver, Button.kY.value).whileHeld(new ConveyorForwardCommand(conveyor));
-
-
-
-  
+    new JoystickButton(driver, Button.kY.value).whileHeld(new ConveyorForwardCommand(conveyor));  
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
+
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
+    //goes to the auto chooser selction
     return autoChooser.getSelected();
   }
 }

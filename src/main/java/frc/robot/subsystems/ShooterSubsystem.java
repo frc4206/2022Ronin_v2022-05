@@ -4,16 +4,11 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalVariables;
-import frc.robot.RobotContainer;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -24,7 +19,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private double velocitysetUpper = 0.0;
   private double velocitysetLower = 0.0;
 
-  /** Creates a new Subsys_Motors. */
   public ShooterSubsystem() {
     falconShooterUpper.configFactoryDefault();
     falconShooterLower.configFactoryDefault();
