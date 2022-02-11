@@ -93,6 +93,9 @@ public class RobotContainer {
     zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
     new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
+
+    //-----------------------Shooter Buttons----------------------------------------------/
+
     new JoystickButton(driver, XboxController.Button.kX.value).whenPressed(new ShooterGoCommand(shooter));
     new JoystickButton(driver, XboxController.Button.kX.value).whenReleased(new ShooterStopCommand(shooter));
 
