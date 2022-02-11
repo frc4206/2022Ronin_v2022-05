@@ -18,8 +18,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private WPI_TalonFX falconShooterUpper = new WPI_TalonFX(Constants.Motors.CANshooterUpper);
-  private WPI_TalonFX falconShooterLower = new WPI_TalonFX(Constants.Motors.CANshooterLower);
+  private WPI_TalonFX falconShooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor);
+  private WPI_TalonFX falconShooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor);
 
   private double velocitysetUpper = 0.0;
   private double velocitysetLower = 0.0;
