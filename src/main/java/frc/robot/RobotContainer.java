@@ -15,13 +15,22 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.climber.AngleClimbCommand;
 import frc.robot.commands.climber.AutoClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberMotorStopCommand;
 import frc.robot.commands.climber.ClimberMotorUpCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
+<<<<<<< Updated upstream
 import frc.robot.commands.shooter.ShooterGoCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
+=======
+import frc.robot.commands.conveyor.ConveyorBackwardCommand;
+import frc.robot.commands.conveyor.ConveyorForwardCommand;
+import frc.robot.commands.harvestor.HarvestorInCommand;
+import frc.robot.commands.harvestor.HarvestorOutCommand;
+import frc.robot.commands.harvestor.HarvestorReverseCommand;
+>>>>>>> Stashed changes
 import frc.robot.commands.climber.ClimberMotorDownCommand;
 import frc.robot.subsystems.*;
 
@@ -88,12 +97,23 @@ public class RobotContainer {
     new JoystickButton(driver, XboxController.Button.kX.value).whenReleased(new ShooterStopCommand(shooter));
 
     //-----------------------Climbing Buttons----------------------------------------------/
-    new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
-    new JoystickButton(operator, Button.kB.value).whenPressed(new ClimberMotorUpCommand(motors));
-    new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
-    new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
-    new JoystickButton(operator, Button.kLeftBumper.value).whileHeld(new ClimberDownManualCommand(motors));
-    new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new ClimberUpManualCommand(motors));
+    //new JoystickButton(operator, Button.kY.value).whenPressed(new AutoClimbCommand(pneumatics, motors));
+    //new JoystickButton(operator, Button.kB.value).whenPressed(new ClimberMotorUpCommand(motors));
+    //new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
+    //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
+    new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
+    new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
+    new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
+
+    //-----------------------Harvestor Buttons----------------------------------------------/
+    new AxisTrigger(operator, 2).whenPressed(new HarvestorOutCommand(harvestor));
+    new AxisTrigger(operator, 3).whenPressed(new HarvestorInCommand(harvestor));
+    new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new HarvestorReverseCommand(harvestor));
+    
+    //-----------------------Conveyor Buttons----------------------------------------------/
+    new JoystickButton(operator, Button.kA.value).whileHeld(new ConveyorForwardCommand(conveyor));
+    new JoystickButton(operator, Button.kB.value).whileHeld(new ConveyorBackwardCommand(conveyor));
+
 
   
   }

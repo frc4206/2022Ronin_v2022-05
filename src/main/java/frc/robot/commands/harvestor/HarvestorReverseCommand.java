@@ -7,27 +7,32 @@ package frc.robot.commands.harvestor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HarvestorSubsystem;
 
-public class IntakeCommand extends CommandBase {
- private final HarvestorSubsystem m_harvestor;
-  public IntakeCommand(HarvestorSubsystem harvestor) {
-     m_harvestor = harvestor;
-     addRequirements(harvestor);
+public class HarvestorReverseCommand extends CommandBase {
+  HarvestorSubsystem m_harvestor;
+  public HarvestorReverseCommand(HarvestorSubsystem harvestor) {
+     m_harvestor = harvestor ;
+    addRequirements(m_harvestor);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {  
+    
+ 
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_harvestor.feederIn();
+    m_harvestor.feederOut();
   }
+    
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_harvestor.feederStop();
+    m_harvestor.feederIn();
+
   }
 
   // Returns true when the command should end.
