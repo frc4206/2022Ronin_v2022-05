@@ -50,7 +50,7 @@ public class RobotContainer {
   private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kStart.value);
 
   /* Subsystems */
-  private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+  private final SwerveSubsystem swerve = new SwerveSubsystem();
   private final ClimberSubsystem motors = new ClimberSubsystem();
   private final PneumaticsSubsystem pneumatics = new PneumaticsSubsystem();
   private final HarvestorSubsystem harvestor = new HarvestorSubsystem();
@@ -63,15 +63,15 @@ public class RobotContainer {
   public RobotContainer() {
     boolean fieldRelative = true;
     boolean openLoop = true;
-    s_Swerve.setDefaultCommand(new TeleopSwerve(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
+    swerve.setDefaultCommand(new TeleopSwerve(swerve, driver, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
 
     //makes the smartdashboard f0r auto commands
-    autoChooser.addOption("S Then Backwards", new exampleAuto(s_Swerve));
-    autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(s_Swerve));
-    autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(s_Swerve));
-    autoChooser.addOption("ThreeBallRight", new ThreeBallRightAuto(s_Swerve));
-    autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(s_Swerve));
-    autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(s_Swerve));
+    autoChooser.addOption("S Then Backwards", new exampleAuto(swerve));
+    autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(swerve));
+    autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
+    autoChooser.addOption("ThreeBallRight", new ThreeBallRightAuto(swerve));
+    autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve));
+    autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve));
     SmartDashboard.putData("Auto Selector", autoChooser);
     
     
@@ -82,9 +82,9 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //-----------------------Driver Buttons----------------------------------------------/
-    zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
-    new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(s_Swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
-    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(s_Swerve, true, true));
+    zeroGyro.whenPressed(new InstantCommand(() -> swerve.zeroGyro()));
+    new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
+    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(swerve, true, true));
 
 
 
