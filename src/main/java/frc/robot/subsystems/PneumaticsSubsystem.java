@@ -10,6 +10,7 @@ import frc.robot.GlobalVariables;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Compressor;
 
 public class PneumaticsSubsystem extends SubsystemBase {
 
@@ -19,8 +20,8 @@ public class PneumaticsSubsystem extends SubsystemBase {
   private DoubleSolenoid harvestorDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.harvestorSolenoidFWD, Constants.Pneumatics.harvestorSolenoidBKWD);
 
   //adds the sensors that we may use
-  private AnalogInput pneumaticPressureSensor = new AnalogInput(Constants.Pneumatics.pneumaticPressureSensor);
-  //private Compressor compressor = new Compressor(null);
+  //private AnalogInput pneumaticPressureSensor = new AnalogInput(Constants.Pneumatics.pneumaticPressureSensor);
+  private Compressor compressor = new Compressor(PneumaticsModuleType.REVPH);
   
   public PneumaticsSubsystem() {
     //compressor.enableDigital();
@@ -48,13 +49,27 @@ public class PneumaticsSubsystem extends SubsystemBase {
         harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
         break;
     }
-
+    
   }
+
+  public void GroundFeederOut(){
+
+    harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
+    
+  }
+
+  public void GroundFeederIn(){
+
+    harvestorDSolenoid.set(DoubleSolenoid.Value.kReverse);
+    
+  }
+
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    GlobalVariables.pneumaticPressureSensor = (250.0 * (pneumaticPressureSensor.getVoltage()/5.0)-25.0);
+    //GlobalVariables.pneumaticPressureSensor = (250.0 * (pneumaticPressureSensor.getVoltage()/5.0)-25.0);
     //SmartDashboard.putString("Double Solenoid Status", dblSolenoid.get().toString());
   }
 }

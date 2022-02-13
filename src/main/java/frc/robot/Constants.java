@@ -17,8 +17,8 @@ public final class Constants {
         public static final int climberfalconMotorL = 24;
 
         //kellie
-        public static final int shooterUpperMotor = 10;
-        public static final int shooterLowerMotor = 9;
+        public static final int shooterUpperMotor = 21;
+        public static final int shooterLowerMotor = 22;
 
         //reggie
         public static final int groundmotor = 27; 
@@ -30,26 +30,29 @@ public final class Constants {
 
     public final class Pneumatics{
         //kellie and Mr Blair
-        public static final int climberSolenoidFWD = 0;
-        public static final int climberSolenoidBKWD = 1;
+        public static final int climberSolenoidFWD = 8;
+        public static final int climberSolenoidBKWD = 9;
         public static final int pneumaticPressureSensor = 0;
 
         //reggie
-        public static final int harvestorSolenoidFWD = 2;
-        public static final int harvestorSolenoidBKWD = 3; 
+        public static final int harvestorSolenoidFWD = 10;
+        public static final int harvestorSolenoidBKWD = 11; 
     }
 
     public final class MotorValues{
         //reggie
-        public static final double FeederIn = -0.5;
-        public static final double FeederOut = 0.5;
+        public static final double FeederIn = -0.8;
+        public static final double FeederOut = 0.8;
         public static final double  FeederStop = 0;
 
         //andrew
-        public static final double conveyorForward = -0.5;
-        public static final double conveyorBackward = 0.5;
+        public static final double conveyorForward = 1;
+        public static final double conveyorBackward = -0.5;
         public static final double  conveyorStop = 0;
 
+
+        public static final double shooteruppermanual = 0.5;
+        public static final double  shooterlowermanual = 0.5;
     }
 
     public static final class Swerve {

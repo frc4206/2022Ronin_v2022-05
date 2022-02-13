@@ -24,7 +24,9 @@ public class ShooterSubsystem extends SubsystemBase {
     falconShooterLower.configFactoryDefault();
     falconShooterUpper.set(ControlMode.PercentOutput, 0.0);
     falconShooterLower.set(ControlMode.PercentOutput, 0.0);
-    falconShooterLower.setInverted(true);
+    falconShooterLower.setInverted(false);
+    falconShooterUpper.setInverted(true);
+
     falconShooterUpper.setNeutralMode(NeutralMode.Coast);
     falconShooterLower.setNeutralMode(NeutralMode.Coast);
    
@@ -75,6 +77,11 @@ public class ShooterSubsystem extends SubsystemBase {
     falconShooterLower.set(ControlMode.PercentOutput, 0.0);
   }
 
+  public void shooterManualGo() {
+    falconShooterUpper.set(ControlMode.PercentOutput, Constants.MotorValues.shooteruppermanual);
+    falconShooterLower.set(ControlMode.PercentOutput, Constants.MotorValues.shooterlowermanual);
+  }
+
   public void initialize_enconders() {
     falconShooterUpper.setSelectedSensorPosition(0, 0, 30);
     falconShooterLower.setSelectedSensorPosition(0, 0, 30);
@@ -86,7 +93,7 @@ public class ShooterSubsystem extends SubsystemBase {
   
     //Global_Variables.UpperShooterPower = falconShooterUpper.getMotorOutputPercent();
     //Global_Variables.LowerShooterPower = falconShooterLower.getMotorOutputPercent();
-    GlobalVariables.UpperShooterVelocity = falconShooterUpper.getSelectedSensorVelocity();
-    GlobalVariables.LowerShooterVelocity = falconShooterLower.getSelectedSensorVelocity();
+    // GlobalVariables.UpperShooterVelocity = falconShooterUpper.getSelectedSensorVelocity();
+    // GlobalVariables.LowerShooterVelocity = falconShooterLower.getSelectedSensorVelocity();
   }
 }

@@ -20,14 +20,14 @@ public class HarvestorOutCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {  
-    m_pneumatics.GroundFeederShifter();
+    m_pneumatics.GroundFeederOut();
  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_harvestor.feederOut();
+    m_harvestor.feederIn();
   }
     
 

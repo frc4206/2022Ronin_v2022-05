@@ -22,16 +22,16 @@ public class PowerHubSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putString("Pneumatics System Pressure", GlobalVariables.pneumaticPressureSensor+"");
-    SmartDashboard.putString("Climber Left Amps", getCurrent(9)+"");
+//    SmartDashboard.putString("Pneumatics System Pressure", GlobalVariables.pneumaticPressureSensor+"");
+//    SmartDashboard.putString("Climber Left Amps", getCurrent(9)+"");
     SmartDashboard.putString("Climber Left Encoder", GlobalVariables.climberLeftEncoder+"");
-    SmartDashboard.putString("Climber Right Amps", getCurrent(8)+"");
+//    SmartDashboard.putString("Climber Right Amps", getCurrent(8)+"");
     SmartDashboard.putString("Climber Right Encoder", GlobalVariables.climberRightEncoder+"");
-    SmartDashboard.putString("Climb Task", GlobalVariables.climbtasknumber+"");
-    SmartDashboard.putString("Limitswitch", GlobalVariables.Limitswitch+"");
-    SmartDashboard.putString("Upper Velocity", GlobalVariables.UpperShooterVelocity+"");
-    SmartDashboard.putString("Lower Velocity", GlobalVariables.LowerShooterVelocity+"");
-    SmartDashboard.putString("Upper Velocity Set", GlobalVariables.UpperVelocitySet+"");
-    SmartDashboard.putString("Lower Velocity Set", GlobalVariables.LowerVelocitySet+"");
+//    SmartDashboard.putString("Climb Task", GlobalVariables.climbtasknumber+"");
+//    SmartDashboard.putString("Limitswitch", GlobalVariables.Limitswitch+"");
+//    SmartDashboard.putString("Upper Velocity", GlobalVariables.UpperShooterVelocity+"");
+//    SmartDashboard.putString("Lower Velocity", GlobalVariables.LowerShooterVelocity+"");
+//   SmartDashboard.putString("Upper Velocity Set", GlobalVariables.UpperVelocitySet+"");
+//   SmartDashboard.putString("Lower Velocity Set", GlobalVariables.LowerVelocitySet+"");
   }
 }

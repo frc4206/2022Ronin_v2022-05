@@ -10,7 +10,7 @@ public class Limelight {
     private static NetworkTableEntry camMode = table.getEntry("camMode");
     private static NetworkTableEntry ledMode = table.getEntry("ledMode");
     private static NetworkTableEntry Pipeline = table.getEntry("pipeline");
-    private static NetworkTableEntry streaml = table.getEntry("stream");
+    private static NetworkTableEntry stream = table.getEntry("stream");
     public NetworkTableEntry horizontalOffset = table.getEntry("tx");
 
     
@@ -18,13 +18,13 @@ public class Limelight {
         //rapidly switching CAM Mode causes Limelight to crash, so pick one and keep it
         camMode.setNumber(0);//tracking vision
         ledMode.setNumber(3);//LED on
-        streaml.setNumber(1);
+        stream.setNumber(1);
     }
 
     public static void disableTracking() {
         camMode.setNumber(1);//regular camera
         ledMode.setNumber(1);//LED off
-        streaml.setNumber(1);
+        stream.setNumber(1);
     }
 
     public static boolean hasTarget() {
