@@ -4,11 +4,13 @@
 
 package frc.robot.commands.harvestor;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HarvestorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class HarvestorOutCommand extends CommandBase {
+  private double startmotortime;
   HarvestorSubsystem m_harvestor;
   PneumaticsSubsystem m_pneumatics;
   public HarvestorOutCommand(HarvestorSubsystem harvestor, PneumaticsSubsystem pneumatics) {
@@ -21,6 +23,7 @@ public class HarvestorOutCommand extends CommandBase {
   @Override
   public void initialize() {  
     m_pneumatics.GroundFeederOut();
+    startmotortime = Timer.getFPGATimestamp() + .5;
  
   }
 
@@ -28,6 +31,9 @@ public class HarvestorOutCommand extends CommandBase {
   @Override
   public void execute() {
     m_harvestor.feederIn();
+    if(Timer.getFPGATimestamp() > startmotortime){
+      m_harvestor.feederOut();
+    }
   }
     
 
