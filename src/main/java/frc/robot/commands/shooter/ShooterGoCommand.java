@@ -19,7 +19,7 @@ public class ShooterGoCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    motors.shooter_set_power();
+    motors.shooterSetPowerXSpot();
     motors.shooter_go();
 
   }

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalVariables;
@@ -13,78 +14,90 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private WPI_TalonFX falconShooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor);
-  private WPI_TalonFX falconShooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor);
+  private WPI_TalonFX shooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor);
+  private WPI_TalonFX shooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor);
 
-  private double velocitysetUpper = 0.0;
-  private double velocitysetLower = 0.0;
+  private double velocitysetHighXSpot = 0.0;
+  private double velocitysetLowXSpot = 0.0;
+
+  private double velocitysetHighWallHigh = 0.0;
+  private double velocitysetLowWallHigh = 0.0;
 
   public ShooterSubsystem() {
-    falconShooterUpper.configFactoryDefault();
-    falconShooterLower.configFactoryDefault();
-    falconShooterUpper.set(ControlMode.PercentOutput, 0.0);
-    falconShooterLower.set(ControlMode.PercentOutput, 0.0);
-    falconShooterLower.setInverted(false);
-    falconShooterUpper.setInverted(true);
+    shooterUpper.configFactoryDefault();
+    shooterLower.configFactoryDefault();
+    shooterUpper.set(ControlMode.PercentOutput, 0.0);
+    shooterLower.set(ControlMode.PercentOutput, 0.0);
+    shooterLower.setInverted(true);
+    shooterUpper.setInverted(false);
 
-    falconShooterUpper.setNeutralMode(NeutralMode.Coast);
-    falconShooterLower.setNeutralMode(NeutralMode.Coast);
+    shooterUpper.setNeutralMode(NeutralMode.Coast);
+    shooterLower.setNeutralMode(NeutralMode.Coast);
    
-      falconShooterUpper.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 30);
-      falconShooterLower.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 30);
+      shooterUpper.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 30);
+      shooterLower.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 30);
     
   
     //Name: Brennan 
     //About: configure the flywheels and set the PID loops(create the horizontal asympote for the velocity to get to) for the most optimal velocity control  
   
-      falconShooterUpper.configClosedloopRamp(0.5, 30);
-      falconShooterLower.configClosedloopRamp(0.5, 30);
-      falconShooterUpper.configAllowableClosedloopError(0, 10);
-      falconShooterLower.configAllowableClosedloopError(0, 10);
+      shooterUpper.configClosedloopRamp(0.5, 30);
+      shooterLower.configClosedloopRamp(0.5, 30);
+      shooterUpper.configAllowableClosedloopError(0, 10);
+      shooterLower.configAllowableClosedloopError(0, 10);
 
-      falconShooterUpper.selectProfileSlot(0, 0);
-      falconShooterUpper.config_kF(0, 0.049, 30);
-      falconShooterUpper.config_kP(0, 0.055, 30);
-      falconShooterUpper.config_kI(0, 0.0005, 30);
-      falconShooterUpper.config_kD(0, 20.0, 30);
-      falconShooterLower.selectProfileSlot(0, 0);
-      falconShooterLower.config_kF(0, 0.049, 30);
-      falconShooterLower.config_kP(0, 0.055, 30);
-      falconShooterLower.config_kI(0, 0.0005, 30);
-      falconShooterLower.config_kD(0, 20.0, 30);
+      shooterUpper.selectProfileSlot(0, 0);
+      shooterUpper.config_kF(0, 0.049, 30);
+      shooterUpper.config_kP(0, 0.055, 30);
+      shooterUpper.config_kI(0, 0.0005, 30);
+      shooterUpper.config_kD(0, 20.0, 30);
+      shooterLower.selectProfileSlot(0, 0);
+      shooterLower.config_kF(0, 0.049, 30);
+      shooterLower.config_kP(0, 0.055, 30);
+      shooterLower.config_kI(0, 0.0005, 30);
+      shooterLower.config_kD(0, 20.0, 30);
 
-      falconShooterUpper.configNominalOutputForward(0.0, 30);
-      falconShooterUpper.configNominalOutputReverse(0.0, 30);
+      shooterUpper.configNominalOutputForward(0.0, 30);
+      shooterUpper.configNominalOutputReverse(0.0, 30);
     
-      falconShooterLower.configNominalOutputForward(0.0, 30);
-      falconShooterLower.configNominalOutputReverse(0.0, 30);
+      shooterLower.configNominalOutputForward(0.0, 30);
+      shooterLower.configNominalOutputReverse(0.0, 30);
     
   
   }
 
-  public void shooter_set_power() {
-    velocitysetUpper = GlobalVariables.UpperVelocitySet;
-    velocitysetLower = GlobalVariables.LowerVelocitySet;
+
+  //set power for diffrent places
+  public void shooterSetPowerXSpot() {
+    velocitysetHighXSpot = GlobalVariables.UpperVelocitySetXSpot;
+    velocitysetLowXSpot = GlobalVariables.LowerVelocitySetXSpot;
   }
 
+  public void shooterSetPowerWallHigh() {
+    velocitysetHighWallHigh = GlobalVariables.UpperVelocitySetWallHigh;
+    velocitysetLowWallHigh = GlobalVariables.LowerVelocitySetWallHigh;
+  }
+
+
+  //shooting coomads
   public void shooter_go() {
-    falconShooterUpper.set(ControlMode.Velocity, velocitysetUpper);
-    falconShooterLower.set(ControlMode.Velocity, velocitysetLower);
+    shooterUpper.set(ControlMode.Velocity, velocitysetHighXSpot);
+    shooterLower.set(ControlMode.Velocity, velocitysetLowXSpot);
   }
 
   public void shooter_stop() {
-    falconShooterUpper.set(ControlMode.PercentOutput, 0.0);
-    falconShooterLower.set(ControlMode.PercentOutput, 0.0);
+    shooterUpper.set(ControlMode.PercentOutput, 0.0);
+    shooterLower.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void shooterManualGo() {
-    falconShooterUpper.set(ControlMode.PercentOutput, Constants.MotorValues.shooteruppermanual);
-    falconShooterLower.set(ControlMode.PercentOutput, Constants.MotorValues.shooterlowermanual);
+    shooterUpper.set(ControlMode.PercentOutput, Constants.MotorValues.shooteruppermanual);
+    shooterLower.set(ControlMode.PercentOutput, Constants.MotorValues.shooterlowermanual);
   }
 
   public void initialize_enconders() {
-    falconShooterUpper.setSelectedSensorPosition(0, 0, 30);
-    falconShooterLower.setSelectedSensorPosition(0, 0, 30);
+    shooterUpper.setSelectedSensorPosition(0, 0, 30);
+    shooterLower.setSelectedSensorPosition(0, 0, 30);
   }
 
     @Override
@@ -95,5 +108,10 @@ public class ShooterSubsystem extends SubsystemBase {
     //Global_Variables.LowerShooterPower = falconShooterLower.getMotorOutputPercent();
     // GlobalVariables.UpperShooterVelocity = falconShooterUpper.getSelectedSensorVelocity();
     // GlobalVariables.LowerShooterVelocity = falconShooterLower.getSelectedSensorVelocity();
+
+
+    SmartDashboard.putString("UpperShooterRPM", shooterUpper.getSelectedSensorVelocity()+"");
+    SmartDashboard.putString("LowerShooterRPM", shooterLower.getSelectedSensorVelocity()+"");
+
   }
 }

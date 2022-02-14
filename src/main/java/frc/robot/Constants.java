@@ -17,8 +17,8 @@ public final class Constants {
         public static final int climberfalconMotorL = 24;
 
         //kellie
-        public static final int shooterUpperMotor = 21;
-        public static final int shooterLowerMotor = 22;
+        public static final int shooterUpperMotor = 22;
+        public static final int shooterLowerMotor = 21;
 
         //reggie
         public static final int groundmotor = 27; 
