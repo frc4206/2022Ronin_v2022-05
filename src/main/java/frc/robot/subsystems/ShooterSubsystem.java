@@ -20,8 +20,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private double velocitysetHighXSpot = 0.0;
   private double velocitysetLowXSpot = 0.0;
 
-  private double velocitysetHighWallHigh = 0.0;
-  private double velocitysetLowWallHigh = 0.0;
+  private double velocitysetHighWallHub = 0.0;
+  private double velocitysetLowWallHub = 0.0;
 
   public ShooterSubsystem() {
     shooterUpper.configFactoryDefault();
@@ -30,7 +30,6 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterLower.set(ControlMode.PercentOutput, 0.0);
     shooterLower.setInverted(true);
     shooterUpper.setInverted(false);
-
     shooterUpper.setNeutralMode(NeutralMode.Coast);
     shooterLower.setNeutralMode(NeutralMode.Coast);
    
@@ -74,15 +73,20 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shooterSetPowerWallHigh() {
-    velocitysetHighWallHigh = GlobalVariables.UpperVelocitySetWallHigh;
-    velocitysetLowWallHigh = GlobalVariables.LowerVelocitySetWallHigh;
+    velocitysetHighWallHub = GlobalVariables.UpperVelocitySetWallHub;
+    velocitysetLowWallHub = GlobalVariables.LowerVelocitySetWallHub;
   }
 
 
   //shooting coomads
-  public void shooter_go() {
+  public void shooterXSpotHub() {
     shooterUpper.set(ControlMode.Velocity, velocitysetHighXSpot);
     shooterLower.set(ControlMode.Velocity, velocitysetLowXSpot);
+  }
+
+  public void shooterWallHigh() {
+    shooterUpper.set(ControlMode.Velocity, velocitysetHighWallHub);
+    shooterLower.set(ControlMode.Velocity, velocitysetLowWallHub);
   }
 
   public void shooter_stop() {

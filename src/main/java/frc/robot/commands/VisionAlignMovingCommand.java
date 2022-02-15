@@ -14,16 +14,11 @@ public class VisionAlignMovingCommand extends CommandBase {
      private final double kI = 0.0000;
      private final double kD = 0.00;
 
-    // option 2 - pi
-    // private final double kP = 0.000425;
-    // private final double kI = 0.0008;
-    // private final double kD = 0.00;
 
-    // option 3 - pd
-    //private final double kP = 0.00083;
-    //private final double kI = 0.0000;
-    //private final double kD = 0.00005;
 
+
+
+     
     private final PIDController pid = new PIDController(kP, kI, kD);
     private final SwerveSubsystem drive;
     private Translation2d translation;

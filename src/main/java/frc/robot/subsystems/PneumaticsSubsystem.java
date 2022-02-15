@@ -53,15 +53,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
   }
 
   public void GroundFeederOut(){
-
     harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
-    
   }
 
   public void GroundFeederIn(){
-
     harvestorDSolenoid.set(DoubleSolenoid.Value.kReverse);
-    
   }
 
 

@@ -7,10 +7,10 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterGoCommand extends CommandBase {
+public class ShooterXSpotCommand extends CommandBase {
   private final ShooterSubsystem motors;
   /** Creates a new Com_Motors. */
-  public ShooterGoCommand(ShooterSubsystem subsystem) {
+  public ShooterXSpotCommand(ShooterSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     motors = subsystem;
     addRequirements(motors);
@@ -20,7 +20,7 @@ public class ShooterGoCommand extends CommandBase {
   @Override
   public void initialize() {
     motors.shooterSetPowerXSpot();
-    motors.shooter_go();
+    motors.shooterXSpotHub();
 
   }
 

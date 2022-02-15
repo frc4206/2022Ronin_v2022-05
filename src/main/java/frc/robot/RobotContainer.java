@@ -17,8 +17,9 @@ import frc.robot.commands.*;
 import frc.robot.commands.climber.AngleClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
-import frc.robot.commands.shooter.ShooterGoCommand;
+import frc.robot.commands.shooter.ShooterXSpotCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
+import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
@@ -84,13 +85,14 @@ public class RobotContainer {
     //-----------------------Driver Buttons----------------------------------------------/
     zeroGyro.whenPressed(new InstantCommand(() -> swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
-    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(swerve, true, true));
+    //new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(swerve, true, true));
 
 
 
     //-----------------------Shooter Buttons----------------------------------------------/
-    new AxisTrigger(driver, 2).whenPressed(new ShooterGoCommand(shooter));
-    new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
+    new AxisTrigger(driver, 2).whenPressed(new ShooterXSpotCommand(shooter));
+    new AxisTrigger(driver, 3).whenPressed(new ShooterWallHubCommand(shooter));
+    new JoystickButton(driver, Button.kA.value).whenPressed(new ShooterStopCommand(shooter));
 
 
 
@@ -102,9 +104,9 @@ public class RobotContainer {
     //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
 
     //basic up and down movement that is manual buttons
-    new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
-    new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
-    new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
+    //new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
+    //new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
+    //new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
 
 
 

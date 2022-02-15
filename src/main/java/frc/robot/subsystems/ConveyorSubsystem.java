@@ -19,7 +19,7 @@ public class ConveyorSubsystem extends SubsystemBase {
 
 
   //functions for running
-  public void conveyorrForward(){
+  public void conveyorForward(){
     conveyor.set(TalonFXControlMode.PercentOutput, Constants.MotorValues.conveyorForward);
   }
   public void conveyorBackward(){
