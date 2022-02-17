@@ -15,10 +15,6 @@ public class VisionAlignMovingCommand extends CommandBase {
      private final double kD = 0.00;
 
 
-
-
-
-     
     private final PIDController pid = new PIDController(kP, kI, kD);
     private final SwerveSubsystem drive;
     private Translation2d translation;

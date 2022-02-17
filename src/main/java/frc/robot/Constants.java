@@ -35,8 +35,8 @@ public final class Constants {
         public static final int pneumaticPressureSensor = 0;
 
         //reggie
-        public static final int harvestorSolenoidFWD = 10;
-        public static final int harvestorSolenoidBKWD = 11; 
+        public static final int harvestorSolenoidFWD = 7;
+        public static final int harvestorSolenoidBKWD = 6; 
     }
 
     public final class MotorValues{
@@ -56,9 +56,8 @@ public final class Constants {
     }
 
     public static final class Swerve {
-        //this is all mainly andrew so just ask and ill explain
         public static final int pigeonID = 20;
-        public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
+        public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(21.5);
@@ -69,8 +68,8 @@ public final class Constants {
         public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
-        public static final double driveGearRatio = (6.75 / 1.0);
-        public static final double angleGearRatio = (12.8 / 1.0); 
+        public static final double driveGearRatio = (6.75 / 1.0); //6.86:1
+        public static final double angleGearRatio = (12.8 / 1.0); //12.8:1
 
         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
                 new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
@@ -78,7 +77,6 @@ public final class Constants {
                 new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
                 new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
 
-                
         /* Swerve Current Limiting */
         public static final int angleContinuousCurrentLimit = 25;
         public static final int anglePeakCurrentLimit = 40;
@@ -128,7 +126,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 11;
-            public static final double angleOffset = 122.6;
+            public static final double angleOffset = 303.1;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -138,7 +136,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final double angleOffset = 346.6;
+            public static final double angleOffset = 171;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -150,7 +148,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 9;
-            public static final double angleOffset = 76.4;
+            public static final double angleOffset = 260.5;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -161,13 +159,12 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 10;
-            public static final double angleOffset = 93.4;
+            public static final double angleOffset = 237.3;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
     }
-
 
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 3;

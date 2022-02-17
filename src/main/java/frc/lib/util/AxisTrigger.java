@@ -14,7 +14,7 @@ public class AxisTrigger extends Button {
         this.threshold = threshold;
     }
 
-    AxisTrigger(GenericHID controller, int axisNumber) {
+    public AxisTrigger(GenericHID controller, int axisNumber) {
         this.controller = controller;
         this.axisNumber = axisNumber;
     }

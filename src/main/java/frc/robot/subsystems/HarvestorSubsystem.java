@@ -10,8 +10,13 @@ import frc.robot.Constants;
 
 public class HarvestorSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  public HarvestorSubsystem() {}
+  public HarvestorSubsystem() {
+    IntakeMotor.setStatusFramePeriod(1, 20);
+
+  }
   TalonFX IntakeMotor = new TalonFX(Constants.MotorsIDs.groundmotor);
+
+  
 
   public void feederIn(){
     IntakeMotor.set(TalonFXControlMode.PercentOutput, Constants.MotorValues.FeederIn);

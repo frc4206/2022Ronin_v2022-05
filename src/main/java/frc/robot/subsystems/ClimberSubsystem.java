@@ -80,6 +80,10 @@ falconMotorL.configFactoryDefault();
 falconMotorR.setNeutralMode(NeutralMode.Brake);
 falconMotorL.setNeutralMode(NeutralMode.Brake);
 falconMotorR.follow(falconMotorL);
+
+falconMotorL.setStatusFramePeriod(1, 20);
+falconMotorR.setStatusFramePeriod(1, 20);
+
 }
 
   public void climber_up() {
@@ -122,8 +126,8 @@ falconMotorR.follow(falconMotorL);
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    GlobalVariables.climberLeftEncoder = falconMotorL.getSelectedSensorPosition();
-    GlobalVariables.climberRightEncoder = falconMotorR.getSelectedSensorPosition();
-    GlobalVariables.Limitswitch = Limitswitch.get();
+    // GlobalVariables.climberLeftEncoder = falconMotorL.getSelectedSensorPosition();
+    // GlobalVariables.climberRightEncoder = falconMotorR.getSelectedSensorPosition();
+    // GlobalVariables.Limitswitch = Limitswitch.get();
   }
 }

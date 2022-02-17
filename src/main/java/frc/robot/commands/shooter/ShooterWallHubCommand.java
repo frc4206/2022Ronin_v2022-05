@@ -5,6 +5,7 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterWallHubCommand extends CommandBase {
@@ -25,11 +26,22 @@ public class ShooterWallHubCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    if(motors.getShooterVelo()>8050){
+      Robot.getRobotContainer().setRumble();
+    }
+    else{
+      Robot.getRobotContainer().offRumble();
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    Robot.getRobotContainer().offRumble();
+
+  }
 
   // Returns true when the command should end.
   @Override

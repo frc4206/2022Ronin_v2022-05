@@ -23,6 +23,16 @@ public class ShooterSubsystem extends SubsystemBase {
   private double velocitysetHighWallHub = 0.0;
   private double velocitysetLowWallHub = 0.0;
 
+  private boolean shooterAtSpeed = false;
+
+  public boolean getShooterSpeed(){
+    return shooterAtSpeed;
+  }
+
+  public void setShooterSpeed(boolean shooterAtSpeedSet){
+    shooterAtSpeed = shooterAtSpeedSet;
+  }
+
   public ShooterSubsystem() {
     shooterUpper.configFactoryDefault();
     shooterLower.configFactoryDefault();
@@ -61,8 +71,27 @@ public class ShooterSubsystem extends SubsystemBase {
     
       shooterLower.configNominalOutputForward(0.0, 30);
       shooterLower.configNominalOutputReverse(0.0, 30);
+
+      shooterLower.setStatusFramePeriod(21, 1000);
+      shooterUpper.setStatusFramePeriod(21, 1000);
+      shooterLower.setStatusFramePeriod(1, 20);
+      shooterUpper.setStatusFramePeriod(1, 20);
+
     
   
+  }
+
+  public double getShooterVelo(){
+    return shooterLower.getSelectedSensorVelocity();
+  }
+
+  public void shooterBolean(){
+    if(getShooterVelo() >= 8050){
+      shooterAtSpeed = true;
+    }
+    else{
+      shooterAtSpeed = false;
+    }
   }
 
 
@@ -114,8 +143,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // GlobalVariables.LowerShooterVelocity = falconShooterLower.getSelectedSensorVelocity();
 
 
-    SmartDashboard.putString("UpperShooterRPM", shooterUpper.getSelectedSensorVelocity()+"");
-    SmartDashboard.putString("LowerShooterRPM", shooterLower.getSelectedSensorVelocity()+"");
+     SmartDashboard.putString("UpperShooterRPM", shooterUpper.getSelectedSensorVelocity()+"");
+     SmartDashboard.putString("LowerShooterRPM", shooterLower.getSelectedSensorVelocity()+"");
 
   }
 }

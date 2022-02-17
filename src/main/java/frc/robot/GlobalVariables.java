@@ -10,8 +10,8 @@ public class GlobalVariables {
   public static String climbtasknumber;
   public static boolean Limitswitch;
 
-  public static double UpperVelocitySetXSpot = 7000.0;//currently testing the balls for this
-  public static double LowerVelocitySetXSpot = 9000.0;//this is the starting position for tomorow
+  public static double UpperVelocitySetXSpot = 7750.0;//currently testing the balls for this 7000.0
+  public static double LowerVelocitySetXSpot = 7250.0;//this is the starting position for tomorow  9000.0;//
 
   public static double UpperVelocitySetWallHub = 3900.0;//these two numbers are done 
   public static double LowerVelocitySetWallHub = 8100.0;//these will be tuned lator

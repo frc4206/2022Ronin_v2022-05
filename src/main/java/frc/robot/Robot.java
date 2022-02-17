@@ -23,7 +23,12 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   private Command m_autonomousCommand;
   private HttpCamera limelightFeed;
-  private RobotContainer m_robotContainer;
+  private static RobotContainer m_robotContainer;
+
+  public static RobotContainer getRobotContainer() {
+    return m_robotContainer;
+  }
+
 
   /**
    * This function is run when the robot is first started up and should be used for any

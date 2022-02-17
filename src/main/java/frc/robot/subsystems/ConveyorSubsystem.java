@@ -12,7 +12,10 @@ import frc.robot.Constants;
 
 public class ConveyorSubsystem extends SubsystemBase {
   /** Creates a new ConveyorSubsystem. */
-  public ConveyorSubsystem() {}
+  public ConveyorSubsystem() {
+    //conveyor.setStatusFramePeriod(1, 20);
+
+  }
 
   //making the motor
   TalonFX conveyor = new TalonFX(Constants.MotorsIDs.conveyormotor);

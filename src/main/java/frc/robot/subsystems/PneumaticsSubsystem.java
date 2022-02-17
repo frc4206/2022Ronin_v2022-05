@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalVariables;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
@@ -18,6 +19,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
   //needs the pistons for the harvestor and climber
   private DoubleSolenoid climberDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.climberSolenoidFWD, Constants.Pneumatics.climberSolenoidBKWD);
   private DoubleSolenoid harvestorDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.harvestorSolenoidFWD, Constants.Pneumatics.harvestorSolenoidBKWD);
+  private PneumaticHub pneumaticHub = new PneumaticHub(40);
 
   //adds the sensors that we may use
   //private AnalogInput pneumaticPressureSensor = new AnalogInput(Constants.Pneumatics.pneumaticPressureSensor);
@@ -49,7 +51,6 @@ public class PneumaticsSubsystem extends SubsystemBase {
         harvestorDSolenoid.set(DoubleSolenoid.Value.kForward);
         break;
     }
-    
   }
 
   public void GroundFeederOut(){

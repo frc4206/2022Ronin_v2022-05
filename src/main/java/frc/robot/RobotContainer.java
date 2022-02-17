@@ -6,25 +6,26 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.lib.util.AxisTrigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
-import frc.robot.commands.climber.AngleClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
-import frc.robot.commands.shooter.ShooterXSpotCommand;
-import frc.robot.commands.shooter.ShooterStopCommand;
-import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.harvestor.HarvestorReverseCommand;
+import frc.robot.commands.shooter.ShooterStopCommand;
+import frc.robot.commands.shooter.ShooterWallHubCommand;
+import frc.robot.commands.shooter.ShooterXSpotCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -90,9 +91,9 @@ public class RobotContainer {
 
 
     //-----------------------Shooter Buttons----------------------------------------------/
-    new AxisTrigger(driver, 2).whenPressed(new ShooterXSpotCommand(shooter));
-    new AxisTrigger(driver, 3).whenPressed(new ShooterWallHubCommand(shooter));
-    new JoystickButton(driver, Button.kA.value).whenPressed(new ShooterStopCommand(shooter));
+    new JoystickButton(driver, Button.kRightBumper.value).whenPressed(new ShooterXSpotCommand(shooter));
+    new JoystickButton(driver, Button.kLeftBumper.value).whenPressed(new ShooterWallHubCommand(shooter));
+    new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
 
 
 
@@ -104,8 +105,8 @@ public class RobotContainer {
     //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
 
     //basic up and down movement that is manual buttons
-    //new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
-    //new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
+    new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
+    new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
     //new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
 
 
@@ -123,6 +124,17 @@ public class RobotContainer {
 
     //in case or driver wanting to shoot
     new JoystickButton(driver, Button.kY.value).whileHeld(new ConveyorForwardCommand(conveyor));  
+  }
+
+  
+  public void setRumble(){
+    driver.setRumble(RumbleType.kLeftRumble, 1);
+    driver.setRumble(RumbleType.kRightRumble, 1);
+  }
+
+  public void offRumble(){
+    driver.setRumble(RumbleType.kLeftRumble, 0);
+    driver.setRumble(RumbleType.kRightRumble, 0);
   }
 
 

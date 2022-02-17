@@ -32,7 +32,7 @@ public class HarvestorOutCommand extends CommandBase {
   public void execute() {
     m_harvestor.feederIn();
     if(Timer.getFPGATimestamp() > startmotortime){
-      m_harvestor.feederOut();
+      m_harvestor.feederIn();
     }
   }
     
