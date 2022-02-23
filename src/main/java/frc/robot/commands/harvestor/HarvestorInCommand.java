@@ -30,6 +30,7 @@ public class HarvestorInCommand extends CommandBase {
   @Override
   public void execute() {
     m_harvestor.feederStop();
+    //m_pneumatics.testRun2();
   }
 
   // Called once the command ends or is interrupted.

@@ -34,6 +34,7 @@ public class HarvestorOutCommand extends CommandBase {
     if(Timer.getFPGATimestamp() > startmotortime){
       m_harvestor.feederIn();
     }
+    //m_pneumatics.testRun1();
   }
     
 

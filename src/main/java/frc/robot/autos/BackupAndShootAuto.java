@@ -7,6 +7,12 @@ package frc.robot.autos;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.VisionAlignStopCommand;
+import frc.robot.commands.conveyor.ConveyorForwardCommand;
+import frc.robot.commands.shooter.ShooterWallHubCommand;
+import frc.robot.subsystems.ConveyorSubsystem;
+import frc.robot.subsystems.HarvestorSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.List;
 import edu.wpi.first.math.controller.PIDController;
@@ -18,13 +24,14 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class BackupAndShootAuto extends SequentialCommandGroup {
-  public BackupAndShootAuto(SwerveSubsystem s_Swerve){
+  public BackupAndShootAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -71,10 +78,18 @@ public class BackupAndShootAuto extends SequentialCommandGroup {
         //resets odemetry
         new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
-        //path part 1
-        drivingPart1,
+        new ShooterWallHubCommand(m_shooter).withTimeout(2),
 
-        new VisionAlignStopCommand(s_Swerve, true, true)
+        new ParallelRaceGroup(
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3),
+            new ShooterWallHubCommand(m_shooter).withTimeout(3),
+            new ConveyorForwardCommand(m_conveyor).withTimeout(3)
+        ),
+
+        //path part 1
+        drivingPart1
+
+
 
     );
 }

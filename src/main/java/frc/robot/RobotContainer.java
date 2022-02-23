@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.util.AxisTrigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.climber.AngleClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
@@ -71,8 +72,9 @@ public class RobotContainer {
     autoChooser.addOption("S Then Backwards", new exampleAuto(swerve));
     autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(swerve));
     autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
-    autoChooser.addOption("ThreeBallRight", new ThreeBallRightAuto(swerve));
-    autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve));
+    autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve));
     SmartDashboard.putData("Auto Selector", autoChooser);
     
@@ -94,6 +96,8 @@ public class RobotContainer {
     new JoystickButton(driver, Button.kRightBumper.value).whenPressed(new ShooterXSpotCommand(shooter));
     new JoystickButton(driver, Button.kLeftBumper.value).whenPressed(new ShooterWallHubCommand(shooter));
     new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
+    new AxisTrigger(driver, 2).whenPressed(new ShooterStopCommand(shooter));
+
 
 
 

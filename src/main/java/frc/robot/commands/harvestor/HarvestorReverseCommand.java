@@ -22,7 +22,7 @@ public class HarvestorReverseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_harvestor.feederOut();
+  m_harvestor.feederOut();
   }
     
 
