@@ -19,6 +19,8 @@ import frc.robot.commands.*;
 import frc.robot.commands.climber.AngleClimbCommand;
 import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
+import frc.robot.commands.climber.PancakeInCommand;
+import frc.robot.commands.climber.PancakeOutCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
@@ -75,7 +77,7 @@ public class RobotContainer {
     autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve));
+    autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     SmartDashboard.putData("Auto Selector", autoChooser);
     
     
@@ -108,10 +110,15 @@ public class RobotContainer {
     //new JoystickButton(operator, Button.kA.value).whenPressed(new ClimberMotorDownCommand(motors));
     //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
 
-    //basic up and down movement that is manual buttons
+    //basic up and down movement that is manual buttons, run by co-driver
     new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
     new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
-    //new JoystickButton(operator, Button.kStart.value).whenPressed(new AngleClimbCommand(pneumatics));
+    new JoystickButton(operator, Button.kStart.value).whenPressed(new PancakeInCommand(pneumatics));
+    new JoystickButton(operator, Button.kBack.value).whenPressed(new PancakeOutCommand(pneumatics));
+
+
+    //driver gets the pison command for now 
+    new JoystickButton(driver, Button.kBack.value).whenPressed(new AngleClimbCommand(pneumatics));
 
 
 

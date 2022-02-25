@@ -18,8 +18,9 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
 
   //needs the pistons for the harvestor and climber
-  private DoubleSolenoid climberDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.climberSolenoidFWD, Constants.Pneumatics.climberSolenoidBKWD);
-  private DoubleSolenoid harvestorDSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.Pneumatics.harvestorSolenoidFWD, Constants.Pneumatics.harvestorSolenoidBKWD);
+  private DoubleSolenoid climberDSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.climberSolenoidFWD, Constants.Pneumatics.climberSolenoidBKWD);
+  private DoubleSolenoid harvestorDSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.harvestorSolenoidFWD, Constants.Pneumatics.harvestorSolenoidBKWD);
+  private DoubleSolenoid pancakeSolonoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Pneumatics.pankakeSolonoidFWD, Constants.Pneumatics.pankakeSolonoidBKWD);
   //private Solenoid test = new Solenoid(PneumaticsModuleType.REVPH, 4);
   //private PneumaticHub pneumaticHub = new PneumaticHub(23);
 
@@ -63,14 +64,13 @@ public class PneumaticsSubsystem extends SubsystemBase {
     harvestorDSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
-  //public void testRun1(){
-  //  test.set(true);
-  //}
+  public void PancakeOut(){
+    pancakeSolonoid.set(DoubleSolenoid.Value.kForward);
+  }
 
-  //public void testRun2(){
-   // test.set(true);
-  //}
-
+  public void PancakeIn(){
+    pancakeSolonoid.set(DoubleSolenoid.Value.kReverse);
+  }
 
 
   @Override

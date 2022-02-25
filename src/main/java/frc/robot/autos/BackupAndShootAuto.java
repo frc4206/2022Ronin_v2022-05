@@ -24,6 +24,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
@@ -45,9 +46,9 @@ public class BackupAndShootAuto extends SequentialCommandGroup {
             // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(-0.5, 0.1), new Translation2d(-1.3, 0)),
+            List.of(new Translation2d(-0.5, 0.1), new Translation2d(-1.5, 0)),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(-2, 0, new Rotation2d(0)),
+            new Pose2d(-3, 0, new Rotation2d(0)),
             config);
 
 
@@ -78,7 +79,10 @@ public class BackupAndShootAuto extends SequentialCommandGroup {
         //resets odemetry
         new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
-        new ShooterWallHubCommand(m_shooter).withTimeout(2),
+        new ParallelCommandGroup(
+            new ShooterWallHubCommand(m_shooter).withTimeout(2),
+            new VisionAlignStopCommand(s_Swerve, true, true)
+        ),
 
         new ParallelRaceGroup(
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3),
