@@ -81,10 +81,10 @@ public class BackupAndShootAuto extends SequentialCommandGroup {
 
         new ParallelCommandGroup(
             new ShooterWallHubCommand(m_shooter).withTimeout(2),
-            new VisionAlignStopCommand(s_Swerve, true, true)
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(2)
         ),
 
-        new ParallelRaceGroup(
+        new ParallelCommandGroup(
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3),
             new ShooterWallHubCommand(m_shooter).withTimeout(3),
             new ConveyorForwardCommand(m_conveyor).withTimeout(3)

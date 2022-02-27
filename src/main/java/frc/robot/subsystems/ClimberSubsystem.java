@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -84,14 +85,18 @@ falconMotorR.follow(falconMotorL);
 falconMotorL.setStatusFramePeriod(1, 20);
 falconMotorR.setStatusFramePeriod(1, 20);
 
+//                                                                       enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  
+falconMotorL.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      50,                55,                1.0));
+falconMotorR.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      50,                55,                1.0));
+
 }
 
   public void climber_up() {
-    falconMotorL.set(0.2);
+    falconMotorL.set(0.8);
   }
 
   public void climber_down() {
-    falconMotorL.set(-0.5);
+    falconMotorL.set(-0.8);
   }
 
   public void climber_stop() {

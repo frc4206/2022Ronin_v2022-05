@@ -23,6 +23,7 @@ import frc.robot.commands.climber.PancakeInCommand;
 import frc.robot.commands.climber.PancakeOutCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
+import frc.robot.commands.harvestor.HarvestorInAndOutCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.harvestor.HarvestorReverseCommand;
@@ -52,7 +53,7 @@ public class RobotContainer {
   private final int rotationAxis = XboxController.Axis.kRightX.value;
 
   /* Driver Buttons */
-  private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kStart.value);
+  private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kX.value);
 
   /* Subsystems */
   private final SwerveSubsystem swerve = new SwerveSubsystem();
@@ -76,6 +77,7 @@ public class RobotContainer {
     autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
     autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins4Ball", new Kevins4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     SmartDashboard.putData("Auto Selector", autoChooser);
@@ -90,7 +92,6 @@ public class RobotContainer {
     //-----------------------Driver Buttons----------------------------------------------/
     zeroGyro.whenPressed(new InstantCommand(() -> swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
-    //new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(swerve, true, true));
 
 
 
@@ -111,8 +112,8 @@ public class RobotContainer {
     //new JoystickButton(operator, Button.kX.value).whenPressed(new ClimberMotorStopCommand(motors));
 
     //basic up and down movement that is manual buttons, run by co-driver
-    new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors));
-    new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors));
+    new JoystickButton(operator, Button.kLeftStick.value).whileHeld(new ClimberDownManualCommand(motors, pneumatics));
+    new JoystickButton(operator, Button.kRightStick.value).whileHeld(new ClimberUpManualCommand(motors, pneumatics));
     new JoystickButton(operator, Button.kStart.value).whenPressed(new PancakeInCommand(pneumatics));
     new JoystickButton(operator, Button.kBack.value).whenPressed(new PancakeOutCommand(pneumatics));
 
@@ -123,8 +124,10 @@ public class RobotContainer {
 
 
     //-----------------------Harvestor Buttons----------------------------------------------/
-    new AxisTrigger(operator, 2).whenPressed(new HarvestorOutCommand(harvestor, pneumatics));
+    new AxisTrigger(operator, 2).whileHeld(new HarvestorInAndOutCommand(harvestor, pneumatics));
     new AxisTrigger(operator, 3).whenPressed(new HarvestorInCommand(harvestor, pneumatics));
+    new JoystickButton(operator, Button.kLeftBumper.value).whenPressed(new HarvestorOutCommand(harvestor,pneumatics));
+
     new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new HarvestorReverseCommand(harvestor));
     
 
@@ -139,6 +142,7 @@ public class RobotContainer {
 
   
   public void setRumble(){
+ 
     driver.setRumble(RumbleType.kLeftRumble, 1);
     driver.setRumble(RumbleType.kRightRumble, 1);
   }

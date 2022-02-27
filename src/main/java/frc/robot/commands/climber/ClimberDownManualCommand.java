@@ -6,20 +6,27 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class ClimberDownManualCommand extends CommandBase {
   private final ClimberSubsystem m_subsystem;
+  private final PneumaticsSubsystem m_pneumatics;
+
   private boolean isFinished;
   /** Creates a new Com_Motors. */
-  public ClimberDownManualCommand(ClimberSubsystem subsystem) {
+  public ClimberDownManualCommand(ClimberSubsystem subsystem, PneumaticsSubsystem pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_subsystem = subsystem;
+    m_pneumatics = pneumatics;
     addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_pneumatics.PancakeIn();
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

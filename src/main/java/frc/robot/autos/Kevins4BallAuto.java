@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.VisionAlignStopCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
-import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.shooter.ShooterXSpotCommand;
@@ -31,13 +30,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ThreeBallHubAuto extends SequentialCommandGroup {
-  public ThreeBallHubAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
+public class Kevins4BallAuto extends SequentialCommandGroup {
+  public Kevins4BallAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -63,46 +61,61 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
             new Pose2d(0, Units.inchesToMeters(-40), new Rotation2d(Units.degreesToRadians(-90))),
-            List.of(
-                new Translation2d(Units.inchesToMeters(6), Units.inchesToMeters(-30)),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(new Translation2d(Units.inchesToMeters(-30), Units.inchesToMeters(-35)), 
 
-                new Translation2d(Units.inchesToMeters(-6), Units.inchesToMeters(-15)),
-
-
-                new Translation2d(Units.inchesToMeters(6), Units.inchesToMeters(-0))
-
-        ),
-            new Pose2d(Units.feetToMeters(0), Units.inchesToMeters(10),  Rotation2d.fromDegrees(70)), config);
+                    new Translation2d(Units.inchesToMeters(-60), Units.inchesToMeters(-30))),
+            
+            
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(Units.inchesToMeters(-100), Units.inchesToMeters(-30), new Rotation2d(Units.degreesToRadians(60))),
+            config);
 
     Trajectory tarjectoryPart3 =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
-            new Pose2d(Units.feetToMeters(0), Units.inchesToMeters(10),  Rotation2d.fromDegrees(70)), 
-            List.of(
-
-            new Translation2d(Units.inchesToMeters(-10), Units.inchesToMeters(-20)),
-
-            new Translation2d(Units.inchesToMeters(-20), Units.inchesToMeters(-40)),
-
-            new Translation2d(Units.inchesToMeters(-45), Units.inchesToMeters(-40)),
-
-            new Translation2d(Units.inchesToMeters(-80), Units.inchesToMeters(-40))
-
-            ),
-            new Pose2d(Units.inchesToMeters(-110), Units.inchesToMeters(-40), new Rotation2d(Units.degreesToRadians(60))),
+            new Pose2d(Units.inchesToMeters(-100), Units.inchesToMeters(-35), new Rotation2d(Units.degreesToRadians(60))),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(new Translation2d(Units.inchesToMeters(-100), Units.inchesToMeters(-25)), 
+    
+                    new Translation2d(Units.inchesToMeters(-100), Units.inchesToMeters(-15))),
+                
+                
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(Units.inchesToMeters(-90), Units.inchesToMeters(-10), new Rotation2d(Units.degreesToRadians(60))),
             config);
+
+
 
     Trajectory tarjectoryPart4 =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
-            new Pose2d(Units.inchesToMeters(-110), Units.inchesToMeters(-40), new Rotation2d(Units.degreesToRadians(60))),
-            List.of(
-                new Translation2d(Units.inchesToMeters(-110), Units.inchesToMeters(10)),
-
-                new Translation2d(Units.inchesToMeters(-110), Units.inchesToMeters(-20))
-            ),
-            new Pose2d(Units.feetToMeters(0), Units.inchesToMeters(10),  Rotation2d.fromDegrees(70)), 
+            new Pose2d(Units.inchesToMeters(-90), Units.inchesToMeters(-10), new Rotation2d(Units.degreesToRadians(60))),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(new Translation2d(Units.inchesToMeters(-130), Units.inchesToMeters(-10)), 
+        
+                    new Translation2d(Units.inchesToMeters(-180), Units.inchesToMeters(-5))),
+                    
+                    
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(Units.inchesToMeters(-220), Units.inchesToMeters(-15), new Rotation2d(Units.degreesToRadians(180))),
             config);
+
+
+
+            Trajectory tarjectoryPart5 =
+            TrajectoryGenerator.generateTrajectory(
+                // Start at the origin facing the +X direction
+                new Pose2d(Units.inchesToMeters(-220), Units.inchesToMeters(-15), new Rotation2d(Units.degreesToRadians(180))),
+                // Pass through these two interior waypoints, making an 's' curve path
+                List.of(
+                    new Translation2d(Units.inchesToMeters(-180), Units.inchesToMeters(-10)),
+            
+                    new Translation2d(Units.inchesToMeters(-130), Units.inchesToMeters(-5))),                         
+                        
+                // End 3 meters straight ahead of where we started, facing forward
+                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(60))),
+                config);
 
             
 
@@ -120,8 +133,8 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
             tarjectoryPart1,
             s_Swerve::getPose,
             Constants.Swerve.swerveKinematics,
-            new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-            new PIDController(Constants.AutoConstants.kPYController, 0, 0),
+            new PIDController(Constants.AutoConstants.kPXControllerfast, 0, 0),
+            new PIDController(Constants.AutoConstants.kPYControllerfast, 0, 0),
             thetaController,
             s_Swerve::setModuleStates,
             s_Swerve);  
@@ -131,8 +144,8 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
               tarjectoryPart2,
               s_Swerve::getPose,
               Constants.Swerve.swerveKinematics,
-              new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-              new PIDController(Constants.AutoConstants.kPYController, 0, 0),
+              new PIDController(Constants.AutoConstants.kPXControllerfast, 0, 0),
+              new PIDController(Constants.AutoConstants.kPYControllerfast, 0, 0),
               thetaController,
               s_Swerve::setModuleStates,
               s_Swerve);   
@@ -142,8 +155,8 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
               tarjectoryPart3,
               s_Swerve::getPose,
               Constants.Swerve.swerveKinematics,
-              new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-              new PIDController(Constants.AutoConstants.kPYController, 0, 0),
+              new PIDController(Constants.AutoConstants.kPXControllerfast, 0, 0),
+              new PIDController(Constants.AutoConstants.kPYControllerfast, 0, 0),
               thetaController,
               s_Swerve::setModuleStates,
               s_Swerve);  
@@ -153,11 +166,22 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
               tarjectoryPart4,
               s_Swerve::getPose,
               Constants.Swerve.swerveKinematics,
-              new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-              new PIDController(Constants.AutoConstants.kPYController, 0, 0),
+              new PIDController(Constants.AutoConstants.kPXControllerfast, 0, 0),
+              new PIDController(Constants.AutoConstants.kPYControllerfast, 0, 0),
               thetaController,
               s_Swerve::setModuleStates,
               s_Swerve);  
+
+              SwerveControllerCommand drivingPart5 =
+              new SwerveControllerCommand(
+                    tarjectoryPart5,
+                    s_Swerve::getPose,
+                    Constants.Swerve.swerveKinematics,
+                    new PIDController(Constants.AutoConstants.kPXControllerfast, 0, 0),
+                    new PIDController(Constants.AutoConstants.kPYControllerfast, 0, 0),
+                    thetaController,
+                    s_Swerve::setModuleStates,
+                    s_Swerve);  
 
 
     //---------------------The Actual Command List That will Run-----------------//
@@ -168,59 +192,68 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
         new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
         //go to first ball
-        new ParallelRaceGroup(
+        new ParallelCommandGroup(
             drivingPart1,
-            new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(2)
+            new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.5)
         ),
 
-        //go back to hub and get ready to shoot
+        //go back near ball 2 and spin
         new ParallelCommandGroup(
 
-            new ParallelCommandGroup(
+            //new ParallelRaceGroup(
                 drivingPart2,
-               new ShooterWallHubCommand(m_shooter).withTimeout(1.5)
-            ),
+               new ShooterXSpotCommand(m_shooter).withTimeout(0.5),
+            //),
             
-            new ConveyorForwardCommand(m_conveyor).withTimeout(0.3)
+            new ConveyorForwardCommand(m_conveyor).withTimeout(0.5)
         ),
         
         //align to shoot 
-        new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.2),
+        
+        new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.5),
 
         new ParallelCommandGroup(
-            new ShooterWallHubCommand(m_shooter).withTimeout(1.5),
+            new ShooterXSpotCommand(m_shooter).withTimeout(1.5),
             new ConveyorForwardCommand(m_conveyor).withTimeout(1.5),
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.5)
         ),
 
         //pickup ball three
-        new ParallelCommandGroup(
+        //new ParallelCommandGroup(
             drivingPart3,
-            new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.1)
+        /*    new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.5)
 
         ),
 
-        //drive to hub and shoot
+        //align to shoot again
+        new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.5),
+
         new ParallelCommandGroup(
-          drivingPart4,
-          new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(1),
-          new ConveyorForwardCommand(m_conveyor).withTimeout(1.5),
-          new ShooterWallHubCommand(m_shooter).withTimeout(1.5)
-      ),
-        //align to shoot again from hub
+            new ShooterXSpotCommand(m_shooter).withTimeout(1.5),
+            new ConveyorForwardCommand(m_conveyor).withTimeout(1.5),
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.5)
+        ),
+*/
+        //go to terminal
+        drivingPart4,
+
+        new ParallelCommandGroup(
+            drivingPart5,
+            new ConveyorForwardCommand(m_conveyor).withTimeout(0.2),
+            new ShooterWallHubCommand(m_shooter)
+        ),
+
         new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.5),
 
         new ParallelCommandGroup(
             new ShooterWallHubCommand(m_shooter).withTimeout(1.5),
             new ConveyorForwardCommand(m_conveyor).withTimeout(1.5),
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.5)
-        ),
-
-        //go to terminal
-  
+        )
+        
 
         //zeros gyro
-        new InstantCommand(() -> s_Swerve.zeroGyro()).withTimeout(0.1)
+        //new InstantCommand(() -> s_Swerve.zeroGyro()).withTimeout(0.1)
 
     );
 }

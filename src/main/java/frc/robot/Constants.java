@@ -131,7 +131,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 11;
-            public static final double angleOffset = 188.45;
+            public static final double angleOffset = 192;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -141,7 +141,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final double angleOffset = 170.6;
+            public static final double angleOffset = 169.36;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -153,7 +153,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 9;
-            public static final double angleOffset = 91.6;
+            public static final double angleOffset = 264.5;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -164,7 +164,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 10;
-            public static final double angleOffset = 22.25;
+            public static final double angleOffset = 23.81;
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -179,6 +179,8 @@ public final class Constants {
     
         public static final double kPXController = 1;
         public static final double kPYController = 1;
+        public static final double kPXControllerfast = 5;
+        public static final double kPYControllerfast = 5;
         public static final double kPThetaController = 2;
     
         // Constraint for the motion profilied robot angle controller

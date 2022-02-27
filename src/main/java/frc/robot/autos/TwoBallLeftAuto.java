@@ -11,6 +11,7 @@ import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
+import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.shooter.ShooterXSpotCommand;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.HarvestorSubsystem;
@@ -61,9 +62,9 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
                   // Start at the origin facing the +X direction
                   new Pose2d(Units.inchesToMeters(-60), Units.inchesToMeters(-42), new Rotation2d(Units.degreesToRadians(180))),
                   // Pass through these two interior waypoints, making an 's' curve path
-                  List.of(new Translation2d(Units.inchesToMeters(-42), Units.inchesToMeters(-36)), new Translation2d(Units.inchesToMeters(-21), Units.inchesToMeters(-25))),
+                  List.of(new Translation2d(Units.inchesToMeters(-42), Units.inchesToMeters(-52)), new Translation2d(Units.inchesToMeters(-21), Units.inchesToMeters(-25))),
                   // End 3 meters straight ahead of where we started, facing forward
-                  new Pose2d(0, 0, new Rotation2d(-50)),
+                  new Pose2d(Units.inchesToMeters(5), Units.inchesToMeters(5), new Rotation2d(-50)),
                   config);
 
 
@@ -111,13 +112,23 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
             new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(4)
             ),
 
-          //turns around
-          drivingPart2,
+            //comes back
+            new ParallelCommandGroup(
+                drivingPart2,
+                new ConveyorForwardCommand(m_conveyor).withTimeout(0.5),
+                new ShooterWallHubCommand(m_shooter).withTimeout(1)
 
-          new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1),
+            ),
+
+
+          //turns around
+          new ParallelCommandGroup(
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1),
+            new ShooterWallHubCommand(m_shooter).withTimeout(1)
+          ),
 
           new ParallelCommandGroup(
-              new ShooterXSpotCommand(m_shooter).withTimeout(3),
+              new ShooterWallHubCommand(m_shooter).withTimeout(3),
               new ConveyorForwardCommand(m_conveyor).withTimeout(3),
               new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3)
           ),
