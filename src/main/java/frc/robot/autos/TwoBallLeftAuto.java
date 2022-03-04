@@ -106,6 +106,8 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
           //resets odemetry
           new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
+          new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(1),
+
           //drives to ball and spins
           new ParallelRaceGroup(
             drivingPart1,
