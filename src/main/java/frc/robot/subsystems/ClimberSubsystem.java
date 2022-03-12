@@ -19,8 +19,8 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 public class ClimberSubsystem extends SubsystemBase {
-  private WPI_TalonFX falconMotorR = new WPI_TalonFX(Constants.MotorsIDs.climberfalconMotorR);
-  private WPI_TalonFX falconMotorL = new WPI_TalonFX(Constants.MotorsIDs.climberfalconMotorL);
+  private WPI_TalonFX falconMotorR = new WPI_TalonFX(Constants.MotorsIDs.climberfalconMotorR, Constants.Canivore1);
+  private WPI_TalonFX falconMotorL = new WPI_TalonFX(Constants.MotorsIDs.climberfalconMotorL, Constants.Canivore1);
   private DigitalInput Limitswitch = new DigitalInput(9);
   
 

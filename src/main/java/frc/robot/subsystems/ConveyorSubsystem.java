@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -18,7 +20,14 @@ public class ConveyorSubsystem extends SubsystemBase {
   }
 
   //making the motor
-  TalonFX conveyor = new TalonFX(Constants.MotorsIDs.conveyormotor);
+  TalonFX conveyor = new TalonFX(Constants.MotorsIDs.conveyormotor, Constants.Canivore1);
+  DigitalInput beambreak = new DigitalInput(0);
+
+
+
+  public Boolean getBeamBreak(){
+     return beambreak.get();
+  } 
 
 
   //functions for running
@@ -35,6 +44,7 @@ public class ConveyorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putString("beamBreakStatus", getBeamBreak()+"");
     // This method will be called once per scheduler run
   }
 }

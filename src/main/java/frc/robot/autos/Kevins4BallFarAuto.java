@@ -24,22 +24,44 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import frc.robot.Constants;
 import frc.robot.commands.VisionAlignStopCommand;
 import frc.robot.commands.conveyor.ConveyorAutoCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
+import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
-
+import frc.robot.commands.shooter.ShooterXSpotCommand;
+import frc.robot.subsystems.ConveyorSubsystem;
+import frc.robot.subsystems.HarvestorSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
+import java.util.List;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Kevins4BallAuto extends SequentialCommandGroup {
-  public Kevins4BallAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
+public class Kevins4BallFarAuto extends SequentialCommandGroup {
+  public Kevins4BallFarAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
     TrajectoryConfig config =
         new TrajectoryConfig(
-                Constants.AutoConstants.kMaxSpeedMetersPerSecondfast,
-                Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquaredfast)
+                Constants.AutoConstants.kMaxSpeedMetersPerSecond,
+                Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
             .setKinematics(Constants.Swerve.swerveKinematics);
 
 
@@ -50,18 +72,18 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
             new Pose2d(0, 0, new Rotation2d(Units.degreesToRadians(0))),
 
             //points to grab second cargo
-            List.of(new Translation2d(Units.inchesToMeters(-15), Units.inchesToMeters(5)), 
+            List.of(new Translation2d(Units.inchesToMeters(-15), Units.inchesToMeters(0)), 
 
-                    new Translation2d(Units.inchesToMeters(-20), Units.inchesToMeters(5))),
+                    new Translation2d(Units.inchesToMeters(-30), Units.inchesToMeters(0))),
 
             //spin around and grab second cargp
-            new Pose2d(Units.inchesToMeters(-35), Units.inchesToMeters(5), new Rotation2d(Units.degreesToRadians(170))),
+            new Pose2d(Units.inchesToMeters(-40), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(170))),
             config);
 
     Trajectory tarjectoryPart2 =
         TrajectoryGenerator.generateTrajectory(
         //go to pickup the second ball you need for the auto
-        new Pose2d(Units.inchesToMeters(-35), Units.inchesToMeters(5), new Rotation2d(Units.degreesToRadians(-170))),
+        new Pose2d(Units.inchesToMeters(-40), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(-170))),
             List.of(
                 new Translation2d(Units.inchesToMeters(-20), Units.inchesToMeters(25)),
 
@@ -85,7 +107,7 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
                     new Translation2d(Units.inchesToMeters(5), Units.inchesToMeters(25))),
 
                 
-            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(20), new Rotation2d(Units.degreesToRadians(0))),
+            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
             config);
 
 
@@ -93,7 +115,7 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
     Trajectory tarjectoryPart4 =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
-            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(20), new Rotation2d(Units.degreesToRadians(0))),
+            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
             // Pass through these two interior waypoints, making an 's' curve path
             List.of(
                 new Translation2d(Units.inchesToMeters(-5), Units.inchesToMeters(30)), 
@@ -104,7 +126,7 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
                     
                     
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(Units.inchesToMeters(-15), Units.inchesToMeters(235), new Rotation2d(Units.degreesToRadians(120))),
+            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(245), new Rotation2d(Units.degreesToRadians(120))),
             config);
 
 
@@ -112,18 +134,18 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
             Trajectory tarjectoryPart5 =
             TrajectoryGenerator.generateTrajectory(
                 // Start at the origin facing the +X direction
-                new Pose2d(Units.inchesToMeters(-15), Units.inchesToMeters(235), new Rotation2d(Units.degreesToRadians(120))),
+                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(245), new Rotation2d(Units.degreesToRadians(120))),
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(
                   //new Translation2d(Units.inchesToMeters(-10), Units.inchesToMeters(170)),
             
-                  new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(120)), 
+                  //new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(160)), 
 
-                  new Translation2d(Units.inchesToMeters(20), Units.inchesToMeters(40))), 
+                  new Translation2d(Units.inchesToMeters(20), Units.inchesToMeters(120))), 
 
 
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(15), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(10), Units.inchesToMeters(100), new Rotation2d(Units.degreesToRadians(-60))),
                 config);
 
             
@@ -220,25 +242,41 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
 
          ),
 
-        // // //go back near ball 2 and spin
+        // //go back near ball 2 and spin
+         //new ParallelCommandGroup(
 
             new ParallelCommandGroup(
-                 drivingPart2,
+                drivingPart2,
                 new ShooterWallHubCommand(m_shooter).withTimeout(1.5),
                 new ConveyorForwardCommand(m_conveyor).withTimeout(0.5)
 
            ),
+            
+        //     new ConveyorForwardCommand(m_conveyor).withTimeout(0.5)
+        // ),
+        
+        // //align to shoot 
+        
+        // new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.5),
 
+        // new ParallelCommandGroup(
+        //     new ShooterXSpotCommand(m_shooter).withTimeout(1.5),
+        //     new ConveyorForwardCommand(m_conveyor).withTimeout(1.5),
+        //     new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.5)
+        // ),
 
-        // //pickup ball three
+        //pickup ball three
         new ParallelCommandGroup(
-             drivingPart3,
+            drivingPart3,
+        //     new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.5)
           new ShooterWallHubCommand(m_shooter).withTimeout(1),
+          //new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.1),
           new ConveyorAutoCommand(m_conveyor)
 
          ),
 
         // //align to shoot again
+         //new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.5),
 
          new ParallelCommandGroup(
              new ShooterWallHubCommand(m_shooter).withTimeout(1.5),
@@ -248,33 +286,31 @@ public class Kevins4BallAuto extends SequentialCommandGroup {
 
          ),
 
-        // //go to terminal
+        //go to terminal
         new ParallelCommandGroup(
-           drivingPart4,
+          drivingPart4,
           new ShooterWallHubCommand(m_shooter).withTimeout(3),
           new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.1)
-        ),
-
-        new ParallelCommandGroup(
-            new ConveyorAutoCommand(m_conveyor).withTimeout(0.2),
-            new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.2)
         ),
             
 
          new ParallelCommandGroup(
-             drivingPart5,
+            drivingPart5,
              new ConveyorAutoCommand(m_conveyor),
-             new ShooterWallHubCommand(m_shooter).withTimeout(3)
+             new ShooterXSpotCommand(m_shooter).withTimeout(3)
          ),
 
 
 
          new ParallelCommandGroup(
-             new ShooterWallHubCommand(m_shooter).withTimeout(1),
+             new ShooterXSpotCommand(m_shooter).withTimeout(1),
              new ConveyorForwardCommand(m_conveyor).withTimeout(1),
              new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1)
          )
+        
 
+        //zeros gyro
+        //new InstantCommand(() -> s_Swerve.zeroGyro()).withTimeout(0.1)
 
     );
 }

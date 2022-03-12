@@ -21,12 +21,14 @@ import frc.robot.commands.climber.ClimberDownManualCommand;
 import frc.robot.commands.climber.ClimberUpManualCommand;
 import frc.robot.commands.climber.PancakeInCommand;
 import frc.robot.commands.climber.PancakeOutCommand;
+import frc.robot.commands.conveyor.ConveyorAutoCommand;
 import frc.robot.commands.conveyor.ConveyorBackwardCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.harvestor.HarvestorInAndOutCommand;
 import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.harvestor.HarvestorReverseCommand;
+import frc.robot.commands.harvestor.HarvestorStopCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.shooter.ShooterXSpotCommand;
@@ -77,7 +79,9 @@ public class RobotContainer {
     autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
     autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    autoChooser.addOption("Kevins4Ball", new Kevins4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins5Ball", new Kevins4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins4BallFar", new Kevins4BallFarAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Origanal4Ball", new Origanal4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     SmartDashboard.putData("Auto Selector", autoChooser);
@@ -92,6 +96,8 @@ public class RobotContainer {
     //-----------------------Driver Buttons----------------------------------------------/
     zeroGyro.whenPressed(new InstantCommand(() -> swerve.zeroGyro()));
     new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
+    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new TeleopSwerve(swerve, driver, translationAxis, strafeAxis, rotationAxis, false, true));
+
 
 
 
@@ -124,9 +130,9 @@ public class RobotContainer {
 
 
     //-----------------------Harvestor Buttons----------------------------------------------/
-    new AxisTrigger(operator, 2).whileHeld(new HarvestorInAndOutCommand(harvestor, pneumatics));
+    new AxisTrigger(operator, 2).whileHeld(new HarvestorOutCommand(harvestor, pneumatics));
     new AxisTrigger(operator, 3).whenPressed(new HarvestorInCommand(harvestor, pneumatics));
-    new JoystickButton(operator, Button.kLeftBumper.value).whenPressed(new HarvestorOutCommand(harvestor,pneumatics));
+    new JoystickButton(operator, Button.kLeftBumper.value).whenPressed(new HarvestorStopCommand(harvestor));
 
     new JoystickButton(operator, Button.kRightBumper.value).whileHeld(new HarvestorReverseCommand(harvestor));
     
@@ -135,14 +141,16 @@ public class RobotContainer {
     //-----------------------Conveyor Buttons----------------------------------------------/
     new JoystickButton(operator, Button.kA.value).whileHeld(new ConveyorForwardCommand(conveyor));
     new JoystickButton(operator, Button.kB.value).whileHeld(new ConveyorBackwardCommand(conveyor));
+    new JoystickButton(operator, Button.kY.value).whenPressed(new ConveyorAutoCommand(conveyor));
+
 
     //in case or driver wanting to shoot
     new JoystickButton(driver, Button.kY.value).whileHeld(new ConveyorForwardCommand(conveyor));  
   }
 
-  
+
   public void setRumble(){
- 
+
     driver.setRumble(RumbleType.kLeftRumble, 1);
     driver.setRumble(RumbleType.kRightRumble, 1);
   }

@@ -14,14 +14,19 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private WPI_TalonFX shooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor);
-  private WPI_TalonFX shooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor);
+  private WPI_TalonFX shooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor, Constants.Canivore1);
+  private WPI_TalonFX shooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor, Constants.Canivore1);
 
   private double velocitysetHighXSpot = 0.0;
   private double velocitysetLowXSpot = 0.0;
 
   private double velocitysetHighWallHub = 0.0;
   private double velocitysetLowWallHub = 0.0;
+
+  private double velocitysetHighWallHubplus = 0.0;
+  private double velocitysetLowWallHubplus = 0.0;
+
+
 
   private boolean shooterAtSpeed = false;
 
@@ -106,6 +111,11 @@ public class ShooterSubsystem extends SubsystemBase {
     velocitysetLowWallHub = GlobalVariables.LowerVelocitySetWallHub;
   }
 
+  public void shooterSetPowerWallHighPlus() {
+    velocitysetHighWallHubplus = GlobalVariables.UpperVelocitySetWallHubplus;
+    velocitysetLowWallHubplus = GlobalVariables.LowerVelocitySetWallHubplus;
+  }
+
 
   //shooting coomads
   public void shooterXSpotHub() {
@@ -116,6 +126,11 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shooterWallHigh() {
     shooterUpper.set(ControlMode.Velocity, velocitysetHighWallHub);
     shooterLower.set(ControlMode.Velocity, velocitysetLowWallHub);
+  }
+
+  public void shooterWallHighPlus() {
+    shooterUpper.set(ControlMode.Velocity, velocitysetHighWallHubplus);
+    shooterLower.set(ControlMode.Velocity, velocitysetLowWallHubplus);
   }
 
   public void shooter_stop() {

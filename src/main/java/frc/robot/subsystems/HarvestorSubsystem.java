@@ -14,7 +14,7 @@ public class HarvestorSubsystem extends SubsystemBase {
     IntakeMotor.setStatusFramePeriod(1, 20);
 
   }
-  TalonFX IntakeMotor = new TalonFX(Constants.MotorsIDs.groundmotor);
+  TalonFX IntakeMotor = new TalonFX(Constants.MotorsIDs.groundmotor, Constants.Canivore1);
 
   
 
