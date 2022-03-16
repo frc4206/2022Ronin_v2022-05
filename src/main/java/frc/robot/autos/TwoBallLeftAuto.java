@@ -12,7 +12,6 @@ import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
-import frc.robot.commands.shooter.ShooterXSpotCommand;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.HarvestorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;

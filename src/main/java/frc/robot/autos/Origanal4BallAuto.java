@@ -6,11 +6,6 @@ package frc.robot.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.VisionAlignStopCommand;
-import frc.robot.commands.conveyor.ConveyorForwardCommand;
-import frc.robot.commands.harvestor.HarvestorOutCommand;
-import frc.robot.commands.shooter.ShooterWallHubCommand;
-import frc.robot.commands.shooter.ShooterXSpotCommand;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.HarvestorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
@@ -27,8 +22,6 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

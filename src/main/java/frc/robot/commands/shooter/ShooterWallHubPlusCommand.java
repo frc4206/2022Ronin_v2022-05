@@ -21,7 +21,7 @@ public class ShooterWallHubPlusCommand extends CommandBase {
   @Override
   public void initialize() {
     motors.shooterSetPowerWallHighPlus();
-    motors.shooterWallHigh();
+    motors.shooterWallHighPlus();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

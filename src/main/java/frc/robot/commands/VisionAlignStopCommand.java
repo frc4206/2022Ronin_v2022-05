@@ -13,7 +13,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 public class VisionAlignStopCommand extends CommandBase {
     // option 1 - just p
-    private final double kP = 0.01;//0.0085
+    private final double kP = 0.010;//0.0085
     private final double kI = 0.0000;
     private final double kD = 0.00;
 

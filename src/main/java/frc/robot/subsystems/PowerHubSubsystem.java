@@ -13,6 +13,7 @@ public class PowerHubSubsystem extends SubsystemBase {
   private PowerDistribution pdh = new PowerDistribution();
   /** Creates a new Subsys_Power_Hub. */
   public PowerHubSubsystem() {
+    pdh.clearStickyFaults();
   }
 
   public double getCurrent(int pdhPort) {

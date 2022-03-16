@@ -12,7 +12,6 @@ public class ClimberDownManualCommand extends CommandBase {
   private final ClimberSubsystem m_subsystem;
   private final PneumaticsSubsystem m_pneumatics;
 
-  private boolean isFinished;
   /** Creates a new Com_Motors. */
   public ClimberDownManualCommand(ClimberSubsystem subsystem, PneumaticsSubsystem pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
