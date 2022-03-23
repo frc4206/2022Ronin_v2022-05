@@ -35,8 +35,8 @@ import frc.robot.commands.shooter.ShooterWallHubPlusCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Kevins3to5BallAuto extends SequentialCommandGroup {
-  public Kevins3to5BallAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
+public class Kevins3to5BallOriganalAuto extends SequentialCommandGroup {
+  public Kevins3to5BallOriganalAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecondfast,
@@ -115,15 +115,15 @@ public class Kevins3to5BallAuto extends SequentialCommandGroup {
                 new Pose2d(Units.inchesToMeters(-25), Units.inchesToMeters(235), new Rotation2d(Units.degreesToRadians(100))),
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(
-                  //new Translation2d(Units.inchesToMeters(-10), Units.inchesToMeters(170)),
+                  new Translation2d(Units.inchesToMeters(-25), Units.inchesToMeters(170)),
             
-                  new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(120)), 
+                  new Translation2d(Units.inchesToMeters(-25), Units.inchesToMeters(120)), 
 
-                  new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(40))), 
+                  new Translation2d(Units.inchesToMeters(-25), Units.inchesToMeters(40))), 
 
 
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(23), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(-25), Units.inchesToMeters(23), new Rotation2d(Units.degreesToRadians(0))),
                 config);
 
             
@@ -271,8 +271,10 @@ public class Kevins3to5BallAuto extends SequentialCommandGroup {
 
 
          //aim at the hub
-         new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.2),
-
+         new ParallelCommandGroup(
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.2),
+            new ShooterWallHubPlusCommand(m_shooter).withTimeout(0.2)
+         ),
          //shoot the last 2 cargo
          new ParallelCommandGroup(
              new ShooterWallHubCommand(m_shooter).withTimeout(1),

@@ -28,6 +28,7 @@ import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.harvestor.HarvestorReverseCommand;
 import frc.robot.commands.harvestor.HarvestorStopCommand;
+import frc.robot.commands.shooter.ShooterHubLowerCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
 import frc.robot.commands.shooter.ShooterWallHubPlusCommand;
@@ -79,8 +80,10 @@ public class RobotContainer {
     //autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
     //autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    autoChooser.addOption("Kevins3to5Ball", new Kevins3to5BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    autoChooser.addOption("Kyles3BallTerminal", new Kyles3BallThenTerminal(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins3to5BallFTWorth", new Kevins3to5BallOriganalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins3to5BallShortEnd", new Kevins3to5BallShortEndAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Kevins3to5BallShortAll", new Kevins3to5BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    //autoChooser.addOption("Kyles3BallTerminal", new Kyles3BallThenTerminal(swerve, harvestor, conveyor, shooter, pneumatics));
     //autoChooser.addOption("Kevins4BallFar", new Kevins4BallFarAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     //autoChooser.addOption("Origanal4Ball", new Origanal4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
@@ -105,7 +108,7 @@ public class RobotContainer {
     //-----------------------Shooter Buttons----------------------------------------------/
     new JoystickButton(driver, Button.kLeftBumper.value).whenPressed(new ShooterWallHubCommand(shooter));
     //new JoystickButton(driver, Button.kRightBumper.value).whenPressed(new ShooterXSpotCommand(shooter));
-    new JoystickButton(driver, Button.kRightBumper.value).whenPressed(new ShooterWallHubPlusCommand(shooter));
+    new JoystickButton(driver, Button.kRightBumper.value).whenPressed(new ShooterHubLowerCommand(shooter));
 
     new AxisTrigger(driver, 3).whenPressed(new ShooterStopCommand(shooter));
     new AxisTrigger(driver, 2).whenPressed(new ShooterStopCommand(shooter));

@@ -26,6 +26,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private double velocitysetHighWallHubplus = 0.0;
   private double velocitysetLowWallHubplus = 0.0;
 
+  private double velocitysetHighWallLowHub = 0.0;
+  private double velocitysetLowWallLowHub = 0.0;
+
 
 
   private boolean shooterAtSpeed = false;
@@ -116,6 +119,12 @@ public class ShooterSubsystem extends SubsystemBase {
     velocitysetLowWallHubplus = GlobalVariables.LowerVelocitySetWallHubplus;
   }
 
+  
+  public void shooterSetPowerWallLow() {
+    velocitysetHighWallLowHub = GlobalVariables.UpperVelocitySetWallLow;
+    velocitysetLowWallLowHub = GlobalVariables.LowerVelocitySetWallLow;
+  }
+
 
   //shooting coomads
   public void shooterXSpotHub() {
@@ -131,6 +140,11 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shooterWallHighPlus() {
     shooterUpper.set(ControlMode.Velocity, velocitysetHighWallHubplus);
     shooterLower.set(ControlMode.Velocity, velocitysetLowWallHubplus);
+  }
+
+  public void shooterWallLow() {
+    shooterUpper.set(ControlMode.Velocity, velocitysetHighWallLowHub);
+    shooterLower.set(ControlMode.Velocity, velocitysetLowWallLowHub);
   }
 
   public void shooter_stop() {
