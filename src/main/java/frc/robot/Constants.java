@@ -63,7 +63,7 @@ public final class Constants {
     }
 
     public static final class Swerve {
-        public static final int pigeonID = 20;
+        public static final int pigeonID = 30;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         /* Drivetrain Constants */
