@@ -86,8 +86,8 @@ falconMotorL.setStatusFramePeriod(1, 20);
 falconMotorR.setStatusFramePeriod(1, 20);
 
 //                                                                       enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  
-falconMotorL.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      50,                55,                1.0));
-falconMotorR.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      50,                55,                1.0));
+falconMotorL.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      75,                80,                1.0));
+falconMotorR.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,      75,                80,                1.0));
 
 }
 

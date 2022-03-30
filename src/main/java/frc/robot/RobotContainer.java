@@ -82,10 +82,8 @@ public class RobotContainer {
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallFTWorth", new Kevins3to5BallOriganalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallShortEnd", new Kevins3to5BallShortEndAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Andrews3to5BallShortAll", new Andrews3to5BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallShortAll", new Kevins3to5BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    //autoChooser.addOption("Kyles3BallTerminal", new Kyles3BallThenTerminal(swerve, harvestor, conveyor, shooter, pneumatics));
-    //autoChooser.addOption("Kevins4BallFar", new Kevins4BallFarAuto(swerve, harvestor, conveyor, shooter, pneumatics));
-    //autoChooser.addOption("Origanal4Ball", new Origanal4BallAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     SmartDashboard.putData("Auto Selector", autoChooser);
@@ -99,8 +97,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //-----------------------Driver Buttons----------------------------------------------/
     zeroGyro.whenPressed(new InstantCommand(() -> swerve.zeroGyro()));
-    new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new VisionAlignMovingCommand(swerve, driver, translationAxis, strafeAxis, rotationAxis, true, true));
-    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new TeleopSwerve(swerve, driver, 0, 0, rotationAxis, true, true));
+    new JoystickButton(driver, XboxController.Button.kA.value).whileHeld(new TeleopSwerve(swerve, driver, translationAxis, strafeAxis, rotationAxis, false, true));
+    //new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new TeleopSwerve(swerve, driver, 0, 0, rotationAxis, true, true));
+    new JoystickButton(driver, XboxController.Button.kB.value).whileHeld(new VisionAlignStopCommand(swerve, true,true));
 
 
 

@@ -35,8 +35,8 @@ import frc.robot.commands.shooter.ShooterWallHubPlusCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
-  public Kevins3to5BallShortAllAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
+public class Andrews3to5BallShortAllAuto extends SequentialCommandGroup {
+  public Andrews3to5BallShortAllAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecondfast,
@@ -72,13 +72,13 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
                 new Translation2d(Units.inchesToMeters(-0), Units.inchesToMeters(75))
 
         ),
-        new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(110), new Rotation2d(Units.degreesToRadians(90))),
+        new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(115), new Rotation2d(Units.degreesToRadians(90))),
         config);
 
     Trajectory tarjectoryPart3 =
         TrajectoryGenerator.generateTrajectory(
             //Turn and move back to face the hub so you can shoot the cargo
-            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(110), new Rotation2d(Units.degreesToRadians(120))),
+            new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(115), new Rotation2d(Units.degreesToRadians(120))),
             List.of(new Translation2d(Units.inchesToMeters(-5), Units.inchesToMeters(90)), 
     
                     //new Translation2d(Units.inchesToMeters(5), Units.inchesToMeters(55)),
@@ -86,7 +86,7 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
                     new Translation2d(Units.inchesToMeters(5), Units.inchesToMeters(80))),
 
                 
-            new Pose2d(Units.inchesToMeters(10), Units.inchesToMeters(50), new Rotation2d(Units.degreesToRadians(-40))),
+            new Pose2d(Units.inchesToMeters(10), Units.inchesToMeters(50), new Rotation2d(Units.degreesToRadians(-35))),
             config);
 
 
@@ -94,7 +94,7 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
     Trajectory tarjectoryPart4 =
         TrajectoryGenerator.generateTrajectory(
             // Sprint to the terminal to do an 4-5 ball
-            new Pose2d(Units.inchesToMeters(-10), Units.inchesToMeters(70), new Rotation2d(Units.degreesToRadians(-40))),
+            new Pose2d(Units.inchesToMeters(-10), Units.inchesToMeters(70), new Rotation2d(Units.degreesToRadians(-35))),
             List.of(
                 new Translation2d(Units.inchesToMeters(-10), Units.inchesToMeters(50)), 
                 new Translation2d(Units.inchesToMeters(-10), Units.inchesToMeters(70)), 
@@ -104,7 +104,7 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
                     
                     
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(Units.inchesToMeters(-35), Units.inchesToMeters(255), new Rotation2d(Units.degreesToRadians(110))),
+            new Pose2d(Units.inchesToMeters(-20), Units.inchesToMeters(250), new Rotation2d(Units.degreesToRadians(110))),
             config);
 
 
@@ -112,18 +112,18 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
             Trajectory tarjectoryPart5 =
             TrajectoryGenerator.generateTrajectory(
                 // Start at the origin facing the +X direction
-                new Pose2d(Units.inchesToMeters(-35), Units.inchesToMeters(255), new Rotation2d(Units.degreesToRadians(110))),
+                new Pose2d(Units.inchesToMeters(-20), Units.inchesToMeters(250), new Rotation2d(Units.degreesToRadians(110))),
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(
-                  new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(170)),
+                  new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(170)),
             
                   new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(120)), 
 
-                  new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(110))), 
+                  new Translation2d(Units.inchesToMeters(10), Units.inchesToMeters(90))), 
 
 
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(Units.inchesToMeters(20), Units.inchesToMeters(90), new Rotation2d(Units.degreesToRadians(-50))),
+                new Pose2d(Units.inchesToMeters(10), Units.inchesToMeters(40), new Rotation2d(Units.degreesToRadians(-15))),
                 config);
 
             
@@ -207,9 +207,9 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
         ),
 
         new ParallelCommandGroup(
-            new ShooterWallHubPlusCommand(m_shooter).withTimeout(0.2),
-            new ConveyorForwardCommand(m_conveyor).withTimeout(0.2),
-            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.2)
+            new ShooterWallHubPlusCommand(m_shooter).withTimeout(0.1),
+            new ConveyorForwardCommand(m_conveyor).withTimeout(0.1),
+            new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.1)
         ),
 
         //go to first ball
@@ -241,9 +241,9 @@ public class Kevins3to5BallShortAllAuto extends SequentialCommandGroup {
         //align to shoot again
 
          new ParallelCommandGroup(
-             new ShooterWallHubPlusCommand(m_shooter).withTimeout(1.2),
-             new ConveyorForwardCommand(m_conveyor).withTimeout(1.2),
-             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.2),
+             new ShooterWallHubPlusCommand(m_shooter).withTimeout(1.3),
+             new ConveyorForwardCommand(m_conveyor).withTimeout(1.3),
+             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(1.3),
              new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.1)
 
          ),

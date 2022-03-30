@@ -13,7 +13,7 @@ public class Limelight {
     private static NetworkTableEntry streaml = table.getEntry("stream");
     public NetworkTableEntry horizontalOffset = table.getEntry("tx");
 
-    
+
     public static void enableTracking() {
         //rapidly switching CAM Mode causes Limelight to crash, so pick one and keep it
         camMode.setNumber(0);//tracking vision
@@ -32,8 +32,10 @@ public class Limelight {
     }
 
     public static Vector2 getTargetAngle() {
+
         return new Vector2(table.getEntry("tx").getNumber(0).doubleValue(),
                 table.getEntry("ty").getNumber(0).doubleValue());
+                
     }
 
     public double getHorizontalOffset(){
