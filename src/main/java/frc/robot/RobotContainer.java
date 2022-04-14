@@ -75,17 +75,20 @@ public class RobotContainer {
     swerve.setDefaultCommand(new TeleopSwerve(swerve, driver, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
 
     //makes the smartdashboard f0r auto commands
-    autoChooser.addOption("S Then Backwards", new exampleAuto(swerve));
-    autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(swerve));
+    //autoChooser.addOption("S Then Backwards", new exampleAuto(swerve));
+    //autoChooser.addOption("DriveForwardOnly", new DriveForawrdAuto(swerve));
     //autoChooser.addOption("TwoBallRightForward", new TwoBallRightForwardAuto(swerve));
     //autoChooser.addOption("ThreeBallTerminal", new ThreeBallTearminalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("ThreeBallHub", new ThreeBallHubAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallFTWorth", new Kevins3to5BallOriganalAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallShortEnd", new Kevins3to5BallShortEndAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Andrews3to5BallShortAll", new Andrews3to5BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("Andrews4Ball", new Andrews4BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("Kevins3to5BallShortAll", new Kevins3to5BallShortAllAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("BackupAndShoot", new BackupAndShootAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     autoChooser.addOption("TwoBallLeft", new TwoBallLeftAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("TwoBallLeftUpgrade", new TwoBallLeftUpgradeAuto(swerve, harvestor, conveyor, shooter, pneumatics));
+    autoChooser.addOption("TwoBallLeftKick", new TwoBallLeftKickAuto(swerve, harvestor, conveyor, shooter, pneumatics));
     SmartDashboard.putData("Auto Selector", autoChooser);
     
     

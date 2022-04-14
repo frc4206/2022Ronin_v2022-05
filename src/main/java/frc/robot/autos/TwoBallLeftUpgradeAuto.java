@@ -13,6 +13,8 @@ import frc.robot.commands.harvestor.HarvestorInCommand;
 import frc.robot.commands.harvestor.HarvestorOutCommand;
 import frc.robot.commands.shooter.ShooterStopCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
+import frc.robot.commands.shooter.ShooterWallHubPlusCommand;
+import frc.robot.commands.shooter.ShooterWallHubSemiPlusCommand;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.HarvestorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
@@ -36,8 +38,8 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TwoBallLeftAuto extends SequentialCommandGroup {
-  public TwoBallLeftAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
+public class TwoBallLeftUpgradeAuto extends SequentialCommandGroup {
+  public TwoBallLeftUpgradeAuto(SwerveSubsystem s_Swerve, HarvestorSubsystem m_harvestor, ConveyorSubsystem m_conveyor, ShooterSubsystem m_shooter, PneumaticsSubsystem m_pneumatics){
       TrajectoryConfig config =
           new TrajectoryConfig(
                   Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -49,29 +51,29 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
       Trajectory tarjectoryPart1 =
           TrajectoryGenerator.generateTrajectory(
               // Start at the origin facing the +X direction
-              new Pose2d(0, 0, new Rotation2d(180)),
+              new Pose2d(0, 0, new Rotation2d(0)),
               // Pass through these two interior waypoints, making an 's' curve path
-              List.of(new Translation2d(Units.inchesToMeters(-21), Units.inchesToMeters(-25)), new Translation2d(Units.inchesToMeters(-42), Units.inchesToMeters(-36))),
+              List.of(new Translation2d(Units.inchesToMeters(25), Units.inchesToMeters(-10)), new Translation2d(Units.inchesToMeters(42), Units.inchesToMeters(-20))),
               // End 3 meters straight ahead of where we started, facing forward
-              new Pose2d( Units.inchesToMeters(-60), Units.inchesToMeters(-42), new Rotation2d(Units.degreesToRadians(180))),
+              new Pose2d( Units.inchesToMeters(70), Units.inchesToMeters(-20), new Rotation2d(Units.degreesToRadians(0))),
               config);
 
               //need to fix come back trajectory
               Trajectory tarjectoryPart2 =
               TrajectoryGenerator.generateTrajectory(
                   // Start at the origin facing the +X direction
-                  new Pose2d(Units.inchesToMeters(-60), Units.inchesToMeters(-42), new Rotation2d(Units.degreesToRadians(180))),
+                  new Pose2d(Units.inchesToMeters(70), Units.inchesToMeters(-20), new Rotation2d(Units.degreesToRadians(0))),
                   // Pass through these two interior waypoints, making an 's' curve path
-                  List.of(new Translation2d(Units.inchesToMeters(-42), Units.inchesToMeters(-52)), new Translation2d(Units.inchesToMeters(-21), Units.inchesToMeters(-25))),
+                  List.of(new Translation2d(Units.inchesToMeters(50), Units.inchesToMeters(0))),
                   // End 3 meters straight ahead of where we started, facing forward
-                  new Pose2d(Units.inchesToMeters(5), Units.inchesToMeters(5), new Rotation2d(-60)),
+                  new Pose2d(Units.inchesToMeters(10), Units.inchesToMeters(0), new Rotation2d(-60)),
                   config);
 
 
       //------------------------The PID Controller for the actual auto------------------------//
       var thetaController =
           new ProfiledPIDController(
-              4, 0, 0, Constants.AutoConstants.kThetaControllerConstraints);
+              2, 0, 0, Constants.AutoConstants.kThetaControllerConstraints);
       thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
 
@@ -106,7 +108,7 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
           //resets odemetry
           new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
-          new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.2),
+          new HarvestorOutCommand(m_harvestor, m_pneumatics).withTimeout(0.1),
 
           //drives to ball and spins
           new ParallelRaceGroup(
@@ -118,7 +120,7 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
             new ParallelCommandGroup(
                 drivingPart2,
                 new ConveyorAutoCommand(m_conveyor).withTimeout(1),
-                new ShooterWallHubCommand(m_shooter).withTimeout(1)
+                new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(1)
 
             ),
 
@@ -126,18 +128,21 @@ public class TwoBallLeftAuto extends SequentialCommandGroup {
           //turns around
           new ParallelCommandGroup(
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(0.2),
-            new ShooterWallHubCommand(m_shooter).withTimeout(0.2)
+            new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(0.2)
           ),
 
           new ParallelCommandGroup(
-              new ShooterWallHubCommand(m_shooter).withTimeout(3),
+              new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(3),
               new ConveyorForwardCommand(m_conveyor).withTimeout(3),
               new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3)
           ),
 
-          new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.1),
-
-          new ShooterStopCommand(m_shooter).withTimeout(0.1)
+          new ParallelCommandGroup(
+              new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(3),
+              new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.2),
+              new ConveyorForwardCommand(m_conveyor).withTimeout(3),
+              new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3)
+          )
       );
   }
 }

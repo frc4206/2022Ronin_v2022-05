@@ -16,6 +16,9 @@ public class GlobalVariables {
   public static double UpperVelocitySetWallHub = 3900.0;//these two numbers are done 
   public static double LowerVelocitySetWallHub = 8100.0;//these will be tuned lator
 
+  public static double UpperVelocitySetWallHubsemiplus = 4150.0;//these two numbers are done 
+  public static double LowerVelocitySetWallHubsemiplus = 8250.0;//these will be tuned lator
+
   public static double UpperVelocitySetWallHubplus = 4200.0;//these two numbers are done 
   public static double LowerVelocitySetWallHubplus = 8400.0;//these will be tuned lator
 

@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     limelightFeed = new HttpCamera("limelight", "http://limelight.local:5801/stream.mjpg");
-    Shuffleboard.getTab("Camera").add("LL", limelightFeed).withPosition(0, 0).withSize(15, 8).withProperties(Map.of("Show Crosshair", true, "Show Controls", false));
+    Shuffleboard.getTab("Camera").add("LL", limelightFeed).withPosition(0, 0).withSize(5, 5).withProperties(Map.of("Show Crosshair", false, "Show Controls", false));
   }
 
   /**

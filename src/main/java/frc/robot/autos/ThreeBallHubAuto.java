@@ -192,11 +192,11 @@ public class ThreeBallHubAuto extends SequentialCommandGroup {
         ),
 
         //pickup ball three
-        new ParallelCommandGroup(
+        //new ParallelCommandGroup(
             drivingPart3,
-            new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.1)
+            //new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.1)
 
-        ),
+        //),
 
         //drive to hub and shoot
         new ParallelCommandGroup(
