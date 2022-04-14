@@ -54,15 +54,15 @@ public class TwoBallLeftKickAuto extends SequentialCommandGroup {
               // Start at the origin facing the +X direction
               new Pose2d(0, 0, new Rotation2d(0)),
               // Pass through these two interior waypoints, making an 's' curve path
-              List.of(new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(-15)), new Translation2d( Units.inchesToMeters(0), Units.inchesToMeters(-55))),
+              List.of(new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(-15)), new Translation2d( Units.inchesToMeters(-10), Units.inchesToMeters(-55)) , new Translation2d( Units.inchesToMeters(-10), Units.inchesToMeters(-70))),
               // End 3 meters straight ahead of where we started, facing forward
-              new Pose2d( Units.inchesToMeters(10), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+              new Pose2d( Units.inchesToMeters(15), Units.inchesToMeters(-70), new Rotation2d(Units.degreesToRadians(0))),
               config);
 
               Trajectory tarjectoryPart2 =
               TrajectoryGenerator.generateTrajectory(
                   // Start at the origin facing the +X direction
-                  new Pose2d( Units.inchesToMeters(10), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+                  new Pose2d( Units.inchesToMeters(15), Units.inchesToMeters(-70), new Rotation2d(Units.degreesToRadians(0))),
                   // Pass through these two interior waypoints, making an 's' curve path
                   List.of(new Translation2d(Units.inchesToMeters(25), Units.inchesToMeters(-45)), new Translation2d(Units.inchesToMeters(42), Units.inchesToMeters(-20))),
                   // End 3 meters straight ahead of where we started, facing forward
