@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class ShooterSubsystem extends SubsystemBase {
   private WPI_TalonFX shooterUpper = new WPI_TalonFX(Constants.MotorsIDs.shooterUpperMotor, Constants.Canivore1);
   private WPI_TalonFX shooterLower = new WPI_TalonFX(Constants.MotorsIDs.shooterLowerMotor, Constants.Canivore1);
+  private Spark blinkinLED = new Spark(3);
 
   private double velocitysetHighXSpot = 0.0;
   private double velocitysetLowXSpot = 0.0;
@@ -172,6 +174,15 @@ public class ShooterSubsystem extends SubsystemBase {
   public void initialize_enconders() {
     shooterUpper.setSelectedSensorPosition(0, 0, 30);
     shooterLower.setSelectedSensorPosition(0, 0, 30);
+  }
+
+  public void ledColor1(){
+    blinkinLED.set(0.85);//-0.09blue flash
+                          //-0.51ocean pattern blue
+  }
+
+  public void ledColor2(){
+    blinkinLED.set(0.73);
   }
 
     @Override

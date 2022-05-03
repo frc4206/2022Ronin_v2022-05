@@ -27,7 +27,7 @@ public class ShooterHubLowerCommand extends CommandBase {
   @Override
   public void execute() {
 
-
+    motors.ledColor1();
   }
 
   // Called once the command ends or is interrupted.

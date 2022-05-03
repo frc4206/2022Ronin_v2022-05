@@ -159,13 +159,13 @@ public class TwoBallLeftKickAuto extends SequentialCommandGroup {
           ),
 
           new ParallelCommandGroup(
-              new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(3),
+              new ShooterWallHubPlusCommand(m_shooter).withTimeout(3),
               new ConveyorForwardCommand(m_conveyor).withTimeout(3),
               new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3)
           ),
 
           new ParallelCommandGroup(
-              new ShooterWallHubSemiPlusCommand(m_shooter).withTimeout(3),
+              new ShooterWallHubPlusCommand(m_shooter).withTimeout(3),
               new HarvestorInCommand(m_harvestor, m_pneumatics).withTimeout(0.2),
               new ConveyorForwardCommand(m_conveyor).withTimeout(3),
               new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3)

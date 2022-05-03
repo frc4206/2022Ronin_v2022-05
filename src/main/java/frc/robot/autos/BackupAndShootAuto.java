@@ -9,6 +9,7 @@ import frc.robot.Constants;
 import frc.robot.commands.VisionAlignStopCommand;
 import frc.robot.commands.conveyor.ConveyorForwardCommand;
 import frc.robot.commands.shooter.ShooterWallHubCommand;
+import frc.robot.commands.shooter.ShooterWallHubPlusCommand;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.HarvestorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
@@ -79,13 +80,13 @@ public class BackupAndShootAuto extends SequentialCommandGroup {
         new InstantCommand(() -> s_Swerve.resetOdometry(tarjectoryPart1.getInitialPose())),
 
         new ParallelCommandGroup(
-            new ShooterWallHubCommand(m_shooter).withTimeout(2),
+            new ShooterWallHubPlusCommand(m_shooter).withTimeout(2),
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(2)
         ),
 
         new ParallelCommandGroup(
             new VisionAlignStopCommand(s_Swerve, true, true).withTimeout(3),
-            new ShooterWallHubCommand(m_shooter).withTimeout(3),
+            new ShooterWallHubPlusCommand(m_shooter).withTimeout(3),
             new ConveyorForwardCommand(m_conveyor).withTimeout(3)
         ),
 

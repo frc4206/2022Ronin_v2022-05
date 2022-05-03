@@ -31,6 +31,7 @@ public class ShooterManualShoot extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_shoot.shooter_stop();
+
   }
 
   // Returns true when the command should end.
