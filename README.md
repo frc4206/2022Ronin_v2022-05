@@ -1,6 +1,6 @@
-# SwerveDriveTrain </br>
-**Basic Swerve Code for a Swerve Module using Falcon Motors, a CTRE CANCoder, and a CTRE Pigeon Gyro** </br>
-This code was designed with SDS MK3 style modules in mind, but should be easily adaptable to other styles of modules.</br>
+# RobotOverview </br>
+**SwerveDrive robot with a High Port Shooter and a Traversal Climb** </br>
+This robot uses SDS MK4 L4s, has pathing for multiple autos ranging from 1-5 cargo with limelight targeting, uses a BeamBreak Sensor in the conveyor for accuracy, and runs off 14 falcons.
 
 **Setting Constants**
 ----
