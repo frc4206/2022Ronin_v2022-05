@@ -9,8 +9,8 @@ The following things must be adjusted to your robot and module's specific consta
 2. ```trackWidth``` (Center to Center distance of left and right modules)
 3. ```wheelBase``` (Center to Center distance of front and rear module wheels)
 4. ```wheelDiameter```
-5. ```driveGearRatio``` (for SDS MK3 either: (8.16 / 1) or (6.86 / 1))
-6. ```angleGearRatio``` (for SDS MK3: (12.8 / 1))
+5. ```driveGearRatio``` (for SDS MK4 L2: (6.75 / 1.0))
+6. ```angleGearRatio``` (for SDS MK4/3: (12.8 / 1))
 7. Angle Motor PID Values:
     * To tune start with a low P value (0.01).
     * Multiply by 10 until the module starts oscilating around the set point
