@@ -1,6 +1,6 @@
 # RobotOverview </br>
 **SwerveDrive robot with a High Port Shooter and a Traversal Climb** </br>
-This robot uses SDS MK4 L4s, has pathing for multiple autos ranging from 1-5 cargo with limelight targeting, uses a BeamBreak Sensor in the conveyor for accuracy, and runs off 14 falcons.
+This robot uses SDS MK4 L2s, has pathing for multiple autos ranging from 1-5 cargo with limelight targeting, uses a BeamBreak Sensor in the conveyor for accuracy, a 10 second traversal, and runs off 14 falcons.
 
 **Setting Constants**
 ----
